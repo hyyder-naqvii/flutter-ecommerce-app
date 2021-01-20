@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "849411050507",
+    "project_id": "obay-c58ab",
+    "storage_bucket": "obay-c58ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:849411050507:android:e09ce45f185aa71fbbcb0e",
+        "android_client_info": {
+          "package_name": "com.oogloo.ecommerce_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "849411050507-q6cliah2jdbh27e7c5bqkgel6hhrgo1h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.oogloo.ecommerce_app",
+            "certificate_hash": "203063d24e44c4f1a40f3cb5e0e7395e388d7116"
+          }
+        },
+        {
+          "client_id": "849411050507-lnd5nppl9us6m2lof5ui6broo1j7rbfb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8m-cTrO2UNJQmzqFQsiUBjKm4mxdEo58"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "849411050507-lnd5nppl9us6m2lof5ui6broo1j7rbfb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
