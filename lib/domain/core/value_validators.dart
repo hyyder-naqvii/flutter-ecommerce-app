@@ -98,6 +98,9 @@ Either<ValueFailure<String>, String> validatePassword(String input) {
 }
 
 Either<ValueFailure<String>, String> validatePhoneNumber(String input) {
+  if(input.isEmpty){
+    return right(input);
+  }
   if (input.length >= 10 && input.length <= 12) {
     return right(input);
   } else {

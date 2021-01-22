@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ecommerce_app/domain/entities/fs_product.dart';
+import 'package:ecommerce_app/domain/entities/user.dart';
 import 'package:ecommerce_app/presentation/admin/add_products.dart';
 import 'package:ecommerce_app/presentation/admin/dashboard/dashboard.dart';
 import 'package:ecommerce_app/presentation/auth/register/register_page.dart';
@@ -48,7 +49,7 @@ class RouteGenerator {
       case '/user_profile':
         return MaterialPageRoute(builder: (_) => UserProfile());
       case '/edit_profile':
-        return MaterialPageRoute(builder: (_) => EditProfile());
+        return MaterialPageRoute(builder: (_) => EditProfile(initialUser: args as OOGLOOUser,));
 
       default:
         return _errorRoute();

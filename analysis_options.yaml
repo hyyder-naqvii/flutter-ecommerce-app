@@ -6,3 +6,6 @@ analyzer:
     missing_required_param: error
     must_be_immutable: error
     lowercase_with_underscores : ignore
+    sort_unnamed_constructors_first : ignore
+    avoid_print : ignore
+

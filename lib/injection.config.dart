@@ -20,11 +20,13 @@ import 'infrastructure/core/firebase_authenticate_register_module.dart';
 import 'domain/auth/interface/iauthenticate.dart';
 import 'domain/cart/interface/i_cart_repository.dart';
 import 'domain/product/interface/i_product_repository.dart';
+import 'domain/user/interface/i_user_repository.dart';
 import 'infrastructure/database/tables/users/users_table.dart';
 import 'infrastructure/database/core/obay_database.dart';
 import 'application/products/product_form/product_form_bloc.dart';
 import 'application/products/product_loader/product_loader_bloc.dart';
 import 'infrastructure/firestore/product/repository/product_repository.dart';
+import 'infrastructure/firestore/user/repository/user_repository.dart';
 import 'application/users/users_bloc.dart';
 
 /// adds generated dependencies
@@ -48,16 +50,19 @@ GetIt $initGetIt(
       () => FirebaseAuthenticate(get<FirebaseAuth>(), get<GoogleSignIn>()));
   gh.lazySingleton<IProductRepository>(
       () => ProductRepository(get<FirebaseFirestore>()));
+  gh.lazySingleton<IUserRepository>(
+      () => UserRepository(get<FirebaseFirestore>()));
   gh.lazySingleton<ObayDatabase>(() => ObayDatabase());
   gh.factory<ProductFormBloc>(() => ProductFormBloc(get<IProductRepository>()));
   gh.factory<ProductLoaderBloc>(
       () => ProductLoaderBloc(get<IProductRepository>()));
+  gh.factory<UsersBloc>(
+      () => UsersBloc(get<IAuthenticate>(), get<IUserRepository>()));
   gh.factory<AuthBloc>(() => AuthBloc(get<IAuthenticate>()));
+  gh.factory<AuthenticationBloc>(
+      () => AuthenticationBloc(get<IAuthenticate>(), get<IUserRepository>()));
   gh.lazySingleton<ICartRepository>(() => CartDAO(get<ObayDatabase>()));
   gh.lazySingleton<OUserDAO>(() => OUserDAO(get<ObayDatabase>()));
-  gh.factory<UsersBloc>(() => UsersBloc(get<OUserDAO>()));
-  gh.factory<AuthenticationBloc>(
-      () => AuthenticationBloc(get<IAuthenticate>(), get<OUserDAO>()));
   gh.factory<CartActorBloc>(
       () => CartActorBloc(get<ICartRepository>(), get<IProductRepository>()));
   gh.factory<CartLoaderBloc>(

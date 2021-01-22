@@ -14,17 +14,19 @@ class _$UsersEventTearOff {
   const _$UsersEventTearOff();
 
 // ignore: unused_element
-  GetCurrentUser getCurrentUser(OOGLOOUser oUser) {
-    return GetCurrentUser(
-      oUser,
-    );
+  GetCurrentUser getCurrentUser() {
+    return const GetCurrentUser();
   }
 
 // ignore: unused_element
-  UpdateCurrentUserProfilePic updateCurrentUserProfilePic(OUser oUser,
+  WatchCurrentUser watchCurrentUser() {
+    return const WatchCurrentUser();
+  }
+
+// ignore: unused_element
+  UpdateCurrentUserProfilePic updateCurrentUserProfilePic(
       {@required bool removeInstead}) {
     return UpdateCurrentUserProfilePic(
-      oUser,
       removeInstead: removeInstead,
     );
   }
@@ -38,25 +40,28 @@ const $UsersEvent = _$UsersEventTearOff();
 mixin _$UsersEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult getCurrentUser(OOGLOOUser oUser),
-    @required
-        TResult updateCurrentUserProfilePic(OUser oUser, bool removeInstead),
+    @required TResult getCurrentUser(),
+    @required TResult watchCurrentUser(),
+    @required TResult updateCurrentUserProfilePic(bool removeInstead),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult getCurrentUser(OOGLOOUser oUser),
-    TResult updateCurrentUserProfilePic(OUser oUser, bool removeInstead),
+    TResult getCurrentUser(),
+    TResult watchCurrentUser(),
+    TResult updateCurrentUserProfilePic(bool removeInstead),
     @required TResult orElse(),
   });
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult getCurrentUser(GetCurrentUser value),
+    @required TResult watchCurrentUser(WatchCurrentUser value),
     @required
         TResult updateCurrentUserProfilePic(UpdateCurrentUserProfilePic value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult getCurrentUser(GetCurrentUser value),
+    TResult watchCurrentUser(WatchCurrentUser value),
     TResult updateCurrentUserProfilePic(UpdateCurrentUserProfilePic value),
     @required TResult orElse(),
   });
@@ -83,9 +88,6 @@ abstract class $GetCurrentUserCopyWith<$Res> {
   factory $GetCurrentUserCopyWith(
           GetCurrentUser value, $Res Function(GetCurrentUser) then) =
       _$GetCurrentUserCopyWithImpl<$Res>;
-  $Res call({OOGLOOUser oUser});
-
-  $OOGLOOUserCopyWith<$Res> get oUser;
 }
 
 /// @nodoc
@@ -97,77 +99,49 @@ class _$GetCurrentUserCopyWithImpl<$Res> extends _$UsersEventCopyWithImpl<$Res>
 
   @override
   GetCurrentUser get _value => super._value as GetCurrentUser;
-
-  @override
-  $Res call({
-    Object oUser = freezed,
-  }) {
-    return _then(GetCurrentUser(
-      oUser == freezed ? _value.oUser : oUser as OOGLOOUser,
-    ));
-  }
-
-  @override
-  $OOGLOOUserCopyWith<$Res> get oUser {
-    if (_value.oUser == null) {
-      return null;
-    }
-    return $OOGLOOUserCopyWith<$Res>(_value.oUser, (value) {
-      return _then(_value.copyWith(oUser: value));
-    });
-  }
 }
 
 /// @nodoc
 class _$GetCurrentUser implements GetCurrentUser {
-  const _$GetCurrentUser(this.oUser) : assert(oUser != null);
-
-  @override
-  final OOGLOOUser oUser;
+  const _$GetCurrentUser();
 
   @override
   String toString() {
-    return 'UsersEvent.getCurrentUser(oUser: $oUser)';
+    return 'UsersEvent.getCurrentUser()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is GetCurrentUser &&
-            (identical(other.oUser, oUser) ||
-                const DeepCollectionEquality().equals(other.oUser, oUser)));
+    return identical(this, other) || (other is GetCurrentUser);
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(oUser);
-
-  @override
-  $GetCurrentUserCopyWith<GetCurrentUser> get copyWith =>
-      _$GetCurrentUserCopyWithImpl<GetCurrentUser>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult getCurrentUser(OOGLOOUser oUser),
-    @required
-        TResult updateCurrentUserProfilePic(OUser oUser, bool removeInstead),
+    @required TResult getCurrentUser(),
+    @required TResult watchCurrentUser(),
+    @required TResult updateCurrentUserProfilePic(bool removeInstead),
   }) {
     assert(getCurrentUser != null);
+    assert(watchCurrentUser != null);
     assert(updateCurrentUserProfilePic != null);
-    return getCurrentUser(oUser);
+    return getCurrentUser();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult getCurrentUser(OOGLOOUser oUser),
-    TResult updateCurrentUserProfilePic(OUser oUser, bool removeInstead),
+    TResult getCurrentUser(),
+    TResult watchCurrentUser(),
+    TResult updateCurrentUserProfilePic(bool removeInstead),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (getCurrentUser != null) {
-      return getCurrentUser(oUser);
+      return getCurrentUser();
     }
     return orElse();
   }
@@ -176,10 +150,12 @@ class _$GetCurrentUser implements GetCurrentUser {
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult getCurrentUser(GetCurrentUser value),
+    @required TResult watchCurrentUser(WatchCurrentUser value),
     @required
         TResult updateCurrentUserProfilePic(UpdateCurrentUserProfilePic value),
   }) {
     assert(getCurrentUser != null);
+    assert(watchCurrentUser != null);
     assert(updateCurrentUserProfilePic != null);
     return getCurrentUser(this);
   }
@@ -188,6 +164,7 @@ class _$GetCurrentUser implements GetCurrentUser {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult getCurrentUser(GetCurrentUser value),
+    TResult watchCurrentUser(WatchCurrentUser value),
     TResult updateCurrentUserProfilePic(UpdateCurrentUserProfilePic value),
     @required TResult orElse(),
   }) {
@@ -200,10 +177,105 @@ class _$GetCurrentUser implements GetCurrentUser {
 }
 
 abstract class GetCurrentUser implements UsersEvent {
-  const factory GetCurrentUser(OOGLOOUser oUser) = _$GetCurrentUser;
+  const factory GetCurrentUser() = _$GetCurrentUser;
+}
 
-  OOGLOOUser get oUser;
-  $GetCurrentUserCopyWith<GetCurrentUser> get copyWith;
+/// @nodoc
+abstract class $WatchCurrentUserCopyWith<$Res> {
+  factory $WatchCurrentUserCopyWith(
+          WatchCurrentUser value, $Res Function(WatchCurrentUser) then) =
+      _$WatchCurrentUserCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$WatchCurrentUserCopyWithImpl<$Res>
+    extends _$UsersEventCopyWithImpl<$Res>
+    implements $WatchCurrentUserCopyWith<$Res> {
+  _$WatchCurrentUserCopyWithImpl(
+      WatchCurrentUser _value, $Res Function(WatchCurrentUser) _then)
+      : super(_value, (v) => _then(v as WatchCurrentUser));
+
+  @override
+  WatchCurrentUser get _value => super._value as WatchCurrentUser;
+}
+
+/// @nodoc
+class _$WatchCurrentUser implements WatchCurrentUser {
+  const _$WatchCurrentUser();
+
+  @override
+  String toString() {
+    return 'UsersEvent.watchCurrentUser()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is WatchCurrentUser);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult getCurrentUser(),
+    @required TResult watchCurrentUser(),
+    @required TResult updateCurrentUserProfilePic(bool removeInstead),
+  }) {
+    assert(getCurrentUser != null);
+    assert(watchCurrentUser != null);
+    assert(updateCurrentUserProfilePic != null);
+    return watchCurrentUser();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult getCurrentUser(),
+    TResult watchCurrentUser(),
+    TResult updateCurrentUserProfilePic(bool removeInstead),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (watchCurrentUser != null) {
+      return watchCurrentUser();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult getCurrentUser(GetCurrentUser value),
+    @required TResult watchCurrentUser(WatchCurrentUser value),
+    @required
+        TResult updateCurrentUserProfilePic(UpdateCurrentUserProfilePic value),
+  }) {
+    assert(getCurrentUser != null);
+    assert(watchCurrentUser != null);
+    assert(updateCurrentUserProfilePic != null);
+    return watchCurrentUser(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult getCurrentUser(GetCurrentUser value),
+    TResult watchCurrentUser(WatchCurrentUser value),
+    TResult updateCurrentUserProfilePic(UpdateCurrentUserProfilePic value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (watchCurrentUser != null) {
+      return watchCurrentUser(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class WatchCurrentUser implements UsersEvent {
+  const factory WatchCurrentUser() = _$WatchCurrentUser;
 }
 
 /// @nodoc
@@ -212,7 +284,7 @@ abstract class $UpdateCurrentUserProfilePicCopyWith<$Res> {
           UpdateCurrentUserProfilePic value,
           $Res Function(UpdateCurrentUserProfilePic) then) =
       _$UpdateCurrentUserProfilePicCopyWithImpl<$Res>;
-  $Res call({OUser oUser, bool removeInstead});
+  $Res call({bool removeInstead});
 }
 
 /// @nodoc
@@ -229,11 +301,9 @@ class _$UpdateCurrentUserProfilePicCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object oUser = freezed,
     Object removeInstead = freezed,
   }) {
     return _then(UpdateCurrentUserProfilePic(
-      oUser == freezed ? _value.oUser : oUser as OUser,
       removeInstead: removeInstead == freezed
           ? _value.removeInstead
           : removeInstead as bool,
@@ -243,27 +313,21 @@ class _$UpdateCurrentUserProfilePicCopyWithImpl<$Res>
 
 /// @nodoc
 class _$UpdateCurrentUserProfilePic implements UpdateCurrentUserProfilePic {
-  const _$UpdateCurrentUserProfilePic(this.oUser,
-      {@required this.removeInstead})
-      : assert(oUser != null),
-        assert(removeInstead != null);
+  const _$UpdateCurrentUserProfilePic({@required this.removeInstead})
+      : assert(removeInstead != null);
 
-  @override
-  final OUser oUser;
   @override
   final bool removeInstead;
 
   @override
   String toString() {
-    return 'UsersEvent.updateCurrentUserProfilePic(oUser: $oUser, removeInstead: $removeInstead)';
+    return 'UsersEvent.updateCurrentUserProfilePic(removeInstead: $removeInstead)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is UpdateCurrentUserProfilePic &&
-            (identical(other.oUser, oUser) ||
-                const DeepCollectionEquality().equals(other.oUser, oUser)) &&
             (identical(other.removeInstead, removeInstead) ||
                 const DeepCollectionEquality()
                     .equals(other.removeInstead, removeInstead)));
@@ -271,9 +335,7 @@ class _$UpdateCurrentUserProfilePic implements UpdateCurrentUserProfilePic {
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(oUser) ^
-      const DeepCollectionEquality().hash(removeInstead);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(removeInstead);
 
   @override
   $UpdateCurrentUserProfilePicCopyWith<UpdateCurrentUserProfilePic>
@@ -283,25 +345,27 @@ class _$UpdateCurrentUserProfilePic implements UpdateCurrentUserProfilePic {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult getCurrentUser(OOGLOOUser oUser),
-    @required
-        TResult updateCurrentUserProfilePic(OUser oUser, bool removeInstead),
+    @required TResult getCurrentUser(),
+    @required TResult watchCurrentUser(),
+    @required TResult updateCurrentUserProfilePic(bool removeInstead),
   }) {
     assert(getCurrentUser != null);
+    assert(watchCurrentUser != null);
     assert(updateCurrentUserProfilePic != null);
-    return updateCurrentUserProfilePic(oUser, removeInstead);
+    return updateCurrentUserProfilePic(removeInstead);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult getCurrentUser(OOGLOOUser oUser),
-    TResult updateCurrentUserProfilePic(OUser oUser, bool removeInstead),
+    TResult getCurrentUser(),
+    TResult watchCurrentUser(),
+    TResult updateCurrentUserProfilePic(bool removeInstead),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (updateCurrentUserProfilePic != null) {
-      return updateCurrentUserProfilePic(oUser, removeInstead);
+      return updateCurrentUserProfilePic(removeInstead);
     }
     return orElse();
   }
@@ -310,10 +374,12 @@ class _$UpdateCurrentUserProfilePic implements UpdateCurrentUserProfilePic {
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult getCurrentUser(GetCurrentUser value),
+    @required TResult watchCurrentUser(WatchCurrentUser value),
     @required
         TResult updateCurrentUserProfilePic(UpdateCurrentUserProfilePic value),
   }) {
     assert(getCurrentUser != null);
+    assert(watchCurrentUser != null);
     assert(updateCurrentUserProfilePic != null);
     return updateCurrentUserProfilePic(this);
   }
@@ -322,6 +388,7 @@ class _$UpdateCurrentUserProfilePic implements UpdateCurrentUserProfilePic {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult getCurrentUser(GetCurrentUser value),
+    TResult watchCurrentUser(WatchCurrentUser value),
     TResult updateCurrentUserProfilePic(UpdateCurrentUserProfilePic value),
     @required TResult orElse(),
   }) {
@@ -334,10 +401,9 @@ class _$UpdateCurrentUserProfilePic implements UpdateCurrentUserProfilePic {
 }
 
 abstract class UpdateCurrentUserProfilePic implements UsersEvent {
-  const factory UpdateCurrentUserProfilePic(OUser oUser,
-      {@required bool removeInstead}) = _$UpdateCurrentUserProfilePic;
+  const factory UpdateCurrentUserProfilePic({@required bool removeInstead}) =
+      _$UpdateCurrentUserProfilePic;
 
-  OUser get oUser;
   bool get removeInstead;
   $UpdateCurrentUserProfilePicCopyWith<UpdateCurrentUserProfilePic>
       get copyWith;
@@ -348,7 +414,7 @@ class _$UsersStateTearOff {
   const _$UsersStateTearOff();
 
 // ignore: unused_element
-  _UsersState call({OUser user}) {
+  _UsersState call({OOGLOOUser user}) {
     return _UsersState(
       user: user,
     );
@@ -361,7 +427,7 @@ const $UsersState = _$UsersStateTearOff();
 
 /// @nodoc
 mixin _$UsersState {
-  OUser get user;
+  OOGLOOUser get user;
 
   $UsersStateCopyWith<UsersState> get copyWith;
 }
@@ -371,7 +437,9 @@ abstract class $UsersStateCopyWith<$Res> {
   factory $UsersStateCopyWith(
           UsersState value, $Res Function(UsersState) then) =
       _$UsersStateCopyWithImpl<$Res>;
-  $Res call({OUser user});
+  $Res call({OOGLOOUser user});
+
+  $OOGLOOUserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -387,8 +455,18 @@ class _$UsersStateCopyWithImpl<$Res> implements $UsersStateCopyWith<$Res> {
     Object user = freezed,
   }) {
     return _then(_value.copyWith(
-      user: user == freezed ? _value.user : user as OUser,
+      user: user == freezed ? _value.user : user as OOGLOOUser,
     ));
+  }
+
+  @override
+  $OOGLOOUserCopyWith<$Res> get user {
+    if (_value.user == null) {
+      return null;
+    }
+    return $OOGLOOUserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
+    });
   }
 }
 
@@ -398,7 +476,10 @@ abstract class _$UsersStateCopyWith<$Res> implements $UsersStateCopyWith<$Res> {
           _UsersState value, $Res Function(_UsersState) then) =
       __$UsersStateCopyWithImpl<$Res>;
   @override
-  $Res call({OUser user});
+  $Res call({OOGLOOUser user});
+
+  @override
+  $OOGLOOUserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -416,7 +497,7 @@ class __$UsersStateCopyWithImpl<$Res> extends _$UsersStateCopyWithImpl<$Res>
     Object user = freezed,
   }) {
     return _then(_UsersState(
-      user: user == freezed ? _value.user : user as OUser,
+      user: user == freezed ? _value.user : user as OOGLOOUser,
     ));
   }
 }
@@ -426,7 +507,7 @@ class _$_UsersState implements _UsersState {
   const _$_UsersState({this.user});
 
   @override
-  final OUser user;
+  final OOGLOOUser user;
 
   @override
   String toString() {
@@ -451,10 +532,10 @@ class _$_UsersState implements _UsersState {
 }
 
 abstract class _UsersState implements UsersState {
-  const factory _UsersState({OUser user}) = _$_UsersState;
+  const factory _UsersState({OOGLOOUser user}) = _$_UsersState;
 
   @override
-  OUser get user;
+  OOGLOOUser get user;
   @override
   _$UsersStateCopyWith<_UsersState> get copyWith;
 }

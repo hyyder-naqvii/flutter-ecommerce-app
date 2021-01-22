@@ -3,11 +3,12 @@ import 'package:ecommerce_app/domain/auth/auth_failure.dart';
 import 'package:ecommerce_app/domain/auth/interface/iauthenticate.dart';
 import 'package:ecommerce_app/domain/auth/value_objects/email_address.dart';
 import 'package:ecommerce_app/domain/auth/value_objects/password.dart';
+import 'package:ecommerce_app/domain/auth/value_objects/phone_no.dart';
 import 'package:ecommerce_app/domain/auth/value_objects/uniqueID.dart';
+import 'package:ecommerce_app/domain/auth/value_objects/username.dart';
 import 'package:ecommerce_app/domain/entities/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 
@@ -28,7 +29,6 @@ class FirebaseAuthenticate implements IAuthenticate {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: emailStr, password: passwordStr);
-
 
       return right(unit);
     } on FirebaseException catch (e) {
@@ -88,11 +88,13 @@ class FirebaseAuthenticate implements IAuthenticate {
   OOGLOOUser getSignedInUser() {
     if (_firebaseAuth.currentUser != null) {
       final String uID = _firebaseAuth.currentUser.uid;
-    return  OOGLOOUser(
-          uID: UniqueID.fromUniqueString(uID),
-          emailAddress: _firebaseAuth.currentUser.email,
-
-    );
+      return OOGLOOUser(
+        uID: UniqueID.fromUniqueString(uID),
+        emailAddress: EmailAddress(_firebaseAuth.currentUser.email),
+        username: Username(''),
+        password: Password(''),
+        phoneNumber: PhoneNumber(''),
+      );
     }
 
     return null;

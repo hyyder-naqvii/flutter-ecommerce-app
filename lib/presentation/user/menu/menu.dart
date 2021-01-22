@@ -1,7 +1,5 @@
 import 'package:ecommerce_app/application/products/product_loader/product_loader_bloc.dart';
-import 'package:ecommerce_app/application/users/users_bloc.dart';
 import 'package:ecommerce_app/config/configuration.dart';
-import 'package:ecommerce_app/domain/auth/interface/iauthenticate.dart';
 import 'package:ecommerce_app/domain/entities/fs_product.dart';
 import 'package:ecommerce_app/hardcoded/product_categories.dart';
 import 'package:ecommerce_app/injection.dart';
@@ -14,23 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'components/category_tile.dart';
 import 'components/product_display.dart';
 
-class Menu extends StatefulWidget {
-  const Menu({Key key}) : super(key: key);
-
-  @override
-  _MenuState createState() => _MenuState();
-}
-
-class _MenuState extends State<Menu> {
-  @override
-  void initState() {
-    print("Init Called");
-    final user = getIt<IAuthenticate>().getSignedInUser();
-    print(user.toString());
-    context.read<UsersBloc>().add(UsersEvent.getCurrentUser(user));
-    super.initState();
-  }
-
+class Menu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,97 +39,86 @@ class _MenuState extends State<Menu> {
               }),
         ],
       ),
-      body: BlocConsumer<UsersBloc, UsersState>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          // ignore: avoid_unnecessary_containers
-          if (state.user == null) {
-            return const Center(child: CircularProgressIndicator());
-          } else {
-            // ignore: avoid_unnecessary_containers
-            return Padding(
-              padding: const EdgeInsets.all(25.0),
-              child: BlocProvider<ProductLoaderBloc>(
-                create: (context) => getIt<ProductLoaderBloc>()
-                  ..add(const ProductLoaderEvent.getAllProducts()),
-                child: BlocBuilder<ProductLoaderBloc, ProductLoaderState>(
-                  builder: (context, state) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SearchBox(),
-                        const SizedBox(
-                          height: 25,
-                        ),
-                        buildCategoryHeader(context),
-                        buildCategoryTiles(BlocProvider.of<ProductLoaderBloc>(
-                            context,
-                            listen: false)),
-                        Text(
-                          'Products',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: textColor,
-                            fontSize: Responsive.width(6, context),
-                            letterSpacing: 1.5,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Expanded(
-                            child: state.map(
-                          initial: (_) => Container(),
-                          loadingProducts: (_) => const ProductLoading(),
-                          loadSuccess: (s) => s.products.isNotEmpty
-                              ? ProductDisplaySection(
-                                  products: s.products,
-                                )
-                              : Container(),
-                          loadFailure: (_) => Container(),
-                        )),
-                      ],
-                    );
-                  },
-                ),
-              ),
-            );
-          }
-        },
+      body: Padding(
+        padding: const EdgeInsets.all(25.0),
+        child: BlocProvider<ProductLoaderBloc>(
+          create: (context) => getIt<ProductLoaderBloc>()
+            ..add(const ProductLoaderEvent.getAllProducts()),
+          child: BlocBuilder<ProductLoaderBloc, ProductLoaderState>(
+            builder: (context, state) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SearchBox(),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  buildCategoryHeader(context),
+                  buildCategoryTiles(BlocProvider.of<ProductLoaderBloc>(context,
+                      listen: false)),
+                  Text(
+                    'Products',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: textColor,
+                      fontSize: Responsive.width(6, context),
+                      letterSpacing: 1.5,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Expanded(
+                      child: state.map(
+                    initial: (_) => Container(),
+                    loadingProducts: (_) => const ProductLoading(),
+                    loadSuccess: (s) => s.products.isNotEmpty
+                        ? ProductDisplaySection(
+                            products: s.products,
+                          )
+                        : Container(),
+                    loadFailure: (_) => Container(),
+                  )),
+                ],
+              );
+            },
+          ),
+        ),
       ),
     );
   }
 
   Row buildCategoryHeader(BuildContext context) {
     return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const ScreenTitle(title: 'Categories'),
-                          GestureDetector(
-                            onTap: ()=> context.read<ProductLoaderBloc>().add(ProductLoaderEvent.getAllProducts()),
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 5),
-                              width: Responsive.width(15, context),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                  gradient: LinearGradient(
-                                colors: [mainDarkColor, mainColor],
-                              )),
-                              child: Center(
-                                child: Text(
-                                  'All',
-                                  style: TextStyle(
-                                    fontSize: Responsive.width(4, context),
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      );
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        const ScreenTitle(title: 'Categories'),
+        GestureDetector(
+          onTap: () => context
+              .read<ProductLoaderBloc>()
+              .add(ProductLoaderEvent.getAllProducts()),
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+            width: Responsive.width(15, context),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                gradient: LinearGradient(
+                  colors: [mainDarkColor, mainColor],
+                )),
+            child: Center(
+              child: Text(
+                'All',
+                style: TextStyle(
+                  fontSize: Responsive.width(4, context),
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 
   SingleChildScrollView buildCategoryTiles(ProductLoaderBloc eventHandlerBloc) {

@@ -19,7 +19,7 @@ class ProductRepository implements IProductRepository {
     //Get The document snapshot
     try {
       final snapShot =
-          await _firebaseFirestore.userDocument().productCollection.get();
+          await _firebaseFirestore.adminDocument().productCollection.get();
       final List<FSProduct> products = snapShot.docs
           .map((doc) => FSProductDTO.fromFirestore(doc).toDomain())
           .toList();
@@ -34,10 +34,11 @@ class ProductRepository implements IProductRepository {
       }
     }
   }
+  @override
   Stream<Either<ProductFailure, List<FSProduct>>> watchAllProducts() async* {
     //Get The document snapshot
 
-      final productCollection = _firebaseFirestore.userDocument().productCollection;
+      final productCollection = _firebaseFirestore.adminDocument().productCollection;
       yield* productCollection.snapshots().map((snapshot) => right<ProductFailure,List<FSProduct>>(
         snapshot.docs.map((doc) => FSProductDTO.fromFirestore(doc).toDomain()).toList()
       )).onErrorReturnWith((e) {
@@ -56,10 +57,8 @@ class ProductRepository implements IProductRepository {
       FSProduct product) async {
     try {
       final productCollection =
-          _firebaseFirestore.userDocument().productCollection;
+          _firebaseFirestore.adminDocument().productCollection;
       final productDTO = FSProductDTO.fromDomain(product);
-
-      print(productDTO.id);
       await productCollection.doc(productDTO.id).set(productDTO.toJson());
       print("New Product With Name : ${product.productName.value.getOrElse(null)} Added To FIrestore");
       return right(unit);
@@ -78,7 +77,7 @@ class ProductRepository implements IProductRepository {
     print("Update Called");
     try {
       final productCollection =
-          _firebaseFirestore.userDocument().productCollection;
+          _firebaseFirestore.adminDocument().productCollection;
       final productDTO = FSProductDTO.fromDomain(product);
       await productCollection.doc(product.uID.value.getOrElse(null)).update(productDTO.toJson());
 
@@ -101,7 +100,7 @@ class ProductRepository implements IProductRepository {
   Future<Either<ProductFailure, Unit>> deleteProduct(FSProduct product) async {
     try {
       final productCollection =
-          _firebaseFirestore.userDocument().productCollection;
+          _firebaseFirestore.adminDocument().productCollection;
       final productID = product.uID.value.getOrElse(null);
       // ignore: unnecessary_statements
       productCollection.doc(productID).delete;
@@ -124,7 +123,7 @@ class ProductRepository implements IProductRepository {
     //Get The document snapshot
     try {
       final snapShot =
-          await _firebaseFirestore.userDocument().productCollection.where('productCategory',isEqualTo: category).get();
+          await _firebaseFirestore.adminDocument().productCollection.where('productCategory',isEqualTo: category).get();
       final List<FSProduct> products = snapShot.docs
           .map((doc) => FSProductDTO.fromFirestore(doc).toDomain())
           .toList();
@@ -144,7 +143,7 @@ class ProductRepository implements IProductRepository {
   Future<Either<ProductFailure, FSProduct>> getWithProductID(String productID) async{
     try {
       final snapShot =
-          await _firebaseFirestore.userDocument().productCollection.doc(productID).get();
+          await _firebaseFirestore.adminDocument().productCollection.doc(productID).get();
       final FSProduct product = FSProductDTO.fromFirestore(snapShot).toDomain();
 
       return right(product);

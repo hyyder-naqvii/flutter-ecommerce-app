@@ -14,9 +14,7 @@ abstract class ValueObject<T> {
     if (identical(this, o)) return true;
     return o is ValueObject<T> && o.value == value;
   }
-
   bool isValid() => value.isRight();
-
   /// throws [UnExpectedValueError] containing the [ValueFailure]
   T getOrCrash() {
     return value.fold((f) => throw UnExpectedValueError(f), (r) => r);

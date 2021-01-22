@@ -8,12 +8,12 @@ import 'package:ecommerce_app/domain/auth/value_objects/email_address.dart';
 import 'package:ecommerce_app/domain/auth/value_objects/password.dart';
 import 'package:ecommerce_app/domain/auth/value_objects/phone_no.dart';
 import 'package:ecommerce_app/domain/auth/value_objects/username.dart';
+import 'package:ecommerce_app/domain/entities/user.dart';
+import 'package:ecommerce_app/domain/user/interface/i_user_repository.dart';
 import 'package:ecommerce_app/infrastructure/database/core/obay_database.dart';
 import 'package:ecommerce_app/infrastructure/database/tables/users/users_table.dart';
-
 import 'package:injectable/injectable.dart';
 import 'package:moor/moor.dart';
-
 
 import 'authentication_event.dart';
 import 'authentication_state.dart';
@@ -21,16 +21,15 @@ import 'authentication_state.dart';
 @injectable
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
-
   final IAuthenticate _authenticate;
-  final OUserDAO _oUserDAO;
+  final IUserRepository _iUserRepository;
 
-  AuthenticationBloc(this._authenticate, this._oUserDAO) : super(AuthenticationState.initial());
+  AuthenticationBloc(this._authenticate, this._iUserRepository)
+      : super(AuthenticationState.initial());
 
   @override
   Stream<AuthenticationState> mapEventToState(
-    AuthenticationEvent event,
-  ) async* {
+      AuthenticationEvent event,) async* {
     yield* event.map(
       resetState: (e) async* {
         yield state.copyWith(
@@ -38,7 +37,7 @@ class AuthenticationBloc
             emailAddress: EmailAddress(''),
             password: Password(''),
             showErrorMessages: false,
-            updateSuccess : false,
+            updateSuccess: false,
             isValidating: false,
             authStateOption: none());
       },
@@ -74,22 +73,6 @@ class AuthenticationBloc
 
           failureOrSuccess = await _authenticate.signInWithEmailAndPassword(
               emailAddress: state.emailAddress, password: state.password);
-          if(failureOrSuccess != null && failureOrSuccess.isRight()){
-            final OUser user  = await _oUserDAO.getUserByID(_authenticate.getSignedInUser().uID.value.getOrElse(null));
-            if(user == null){
-              final user = OUsersCompanion(
-                email: Value(state.emailAddress.value.getOrElse(null)),
-                password: Value(state.password.value.getOrElse(null)),
-                userID: Value(_authenticate.getSignedInUser().uID.value.getOrElse(null)),
-                fullName: const Value('John Doe'),
-
-              );
-              _oUserDAO.insertUser(user);
-            }
-
-
-          }
-
         }
 
         yield state.copyWith(
@@ -113,15 +96,22 @@ class AuthenticationBloc
               emailAddress: state.emailAddress, password: state.password);
         }
 
-        if(failureOrSuccess != null && failureOrSuccess.isRight()){
-          _addNewUserToDatabase();
-
+        if (failureOrSuccess != null && failureOrSuccess.isRight()) {
+          final OOGLOOUser user = OOGLOOUser(
+              uID: _authenticate
+                  .getSignedInUser()
+                  .uID,
+              emailAddress: state.emailAddress,
+              password: state.password,
+              username: state.username,
+              phoneNumber: PhoneNumber(''));
+          _iUserRepository.insertNewUser(user);
         }
 
         yield state.copyWith(
           isValidating: false,
           showErrorMessages: true,
-          isRegistered : true,
+          isRegistered: true,
           authStateOption: optionOf(failureOrSuccess),
         );
       },
@@ -136,58 +126,53 @@ class AuthenticationBloc
           isValidating: false,
           authStateOption: some(authState),
         );
-      }, genderChanged: (e)async* {
+      },
+      genderChanged: (e) async* {
         yield state.copyWith(
-          gender : e.gender,
+          gender: e.gender,
           authStateOption: none(),
         );
-    }, phoneNumberChanged:(e)async* {
-
-      yield state.copyWith(
-        phoneNumber: PhoneNumber(e.phoneNumber),
-        authStateOption: none(),
-      );
-    }, profileInformationUpdated: (e)async* {
-      final isFullNameValid = state.username.isValid();
-      final isPhoneNumberValid = state.phoneNumber.isValid();
-
-      if(isFullNameValid && isPhoneNumberValid){
-
-        final OUser oldUser = await _oUserDAO.getUserByID(_authenticate.getSignedInUser().uID.value.getOrElse(null));
-
-        final user = OUsersCompanion(
-          email: Value(oldUser.email),
-          password: Value(oldUser.password),
-          userID: Value(oldUser.userID),
-          fullName: Value(state.username.value.getOrElse(null)),
-          gender: Value(state.gender),
-          phoneNo: Value(state.phoneNumber.value.getOrElse(null)),
-        );
-        _oUserDAO.updateUser(user);
+      },
+      phoneNumberChanged: (e) async* {
         yield state.copyWith(
-          showErrorMessages: false,
-          updateSuccess : true,
+          phoneNumber: PhoneNumber(e.phoneNumber),
+          authStateOption: none(),
         );
-      }
-      else{
-        yield state.copyWith(
-          showErrorMessages: true,
-        );
-      }
-    },
-    );
-  }
+      },
+      profileInformationUpdated: (e) async* {
 
-  void _addNewUserToDatabase(){
-    final user = OUsersCompanion(
-      email: Value(state.emailAddress.value.getOrElse(null)),
-      password: Value(state.password.value.getOrElse(null)),
-      userID: Value(_authenticate.getSignedInUser().uID.value.getOrElse(null)),
-      fullName: Value(state.username.value.getOrElse(null)),
+        yield state.copyWith(
+          isValidating: true,
+          authStateOption: none(),
+        );
+        final isUsernameValid = state.username.isValid();
+        final isPhoneNoValid = state.phoneNumber.isValid();
+        if (isUsernameValid && isPhoneNoValid) {
+
+          final OOGLOOUser user = await _iUserRepository.getUserWithID(_authenticate.getSignedInUser().uID.value.getOrElse(null)).then((value) => value.getOrElse(null));
+
+          final updateFailureOrSuccess = await _iUserRepository.updateUserData(user.copyWith(
+            username : state.username,
+            phoneNumber : state.phoneNumber,
+          ));
+          yield state.copyWith(
+            isValidating: false,
+            showErrorMessages: updateFailureOrSuccess.isRight(),
+
+          );
+
+        }
+        else{
+          yield state.copyWith(
+            isValidating: false,
+            showErrorMessages: true,
+
+          );
+        }
+
+      },
 
     );
-    _oUserDAO.insertUser(user);
-    print("New User Added To Database");
   }
 
 }

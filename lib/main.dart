@@ -33,9 +33,5 @@ void main() async {
       create: (context) =>
           getIt<AuthBloc>()..add(const AuthEvent.requestAuthState()),
     ),
-    BlocProvider<UsersBloc>(
-      create: (context) => getIt<UsersBloc>(),
-    ),
-
   ], child: Home()));
 }
