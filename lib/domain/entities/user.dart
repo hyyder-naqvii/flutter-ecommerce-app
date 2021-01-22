@@ -16,6 +16,9 @@ abstract class OOGLOOUser with _$OOGLOOUser {
     @required Password password,
     @required Username username,
     @required PhoneNumber phoneNumber,
+    @required String gender,
   }
       ) = _User;
+
+  static List<String> genders = ['Male','Female','Other'];
 }

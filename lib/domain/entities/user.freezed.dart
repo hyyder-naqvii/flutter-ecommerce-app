@@ -19,13 +19,15 @@ class _$OOGLOOUserTearOff {
       @required EmailAddress emailAddress,
       @required Password password,
       @required Username username,
-      @required PhoneNumber phoneNumber}) {
+      @required PhoneNumber phoneNumber,
+      @required String gender}) {
     return _User(
       uID: uID,
       emailAddress: emailAddress,
       password: password,
       username: username,
       phoneNumber: phoneNumber,
+      gender: gender,
     );
   }
 }
@@ -41,6 +43,7 @@ mixin _$OOGLOOUser {
   Password get password;
   Username get username;
   PhoneNumber get phoneNumber;
+  String get gender;
 
   $OOGLOOUserCopyWith<OOGLOOUser> get copyWith;
 }
@@ -55,7 +58,8 @@ abstract class $OOGLOOUserCopyWith<$Res> {
       EmailAddress emailAddress,
       Password password,
       Username username,
-      PhoneNumber phoneNumber});
+      PhoneNumber phoneNumber,
+      String gender});
 }
 
 /// @nodoc
@@ -73,6 +77,7 @@ class _$OOGLOOUserCopyWithImpl<$Res> implements $OOGLOOUserCopyWith<$Res> {
     Object password = freezed,
     Object username = freezed,
     Object phoneNumber = freezed,
+    Object gender = freezed,
   }) {
     return _then(_value.copyWith(
       uID: uID == freezed ? _value.uID : uID as UniqueID,
@@ -84,6 +89,7 @@ class _$OOGLOOUserCopyWithImpl<$Res> implements $OOGLOOUserCopyWith<$Res> {
       phoneNumber: phoneNumber == freezed
           ? _value.phoneNumber
           : phoneNumber as PhoneNumber,
+      gender: gender == freezed ? _value.gender : gender as String,
     ));
   }
 }
@@ -98,7 +104,8 @@ abstract class _$UserCopyWith<$Res> implements $OOGLOOUserCopyWith<$Res> {
       EmailAddress emailAddress,
       Password password,
       Username username,
-      PhoneNumber phoneNumber});
+      PhoneNumber phoneNumber,
+      String gender});
 }
 
 /// @nodoc
@@ -117,6 +124,7 @@ class __$UserCopyWithImpl<$Res> extends _$OOGLOOUserCopyWithImpl<$Res>
     Object password = freezed,
     Object username = freezed,
     Object phoneNumber = freezed,
+    Object gender = freezed,
   }) {
     return _then(_User(
       uID: uID == freezed ? _value.uID : uID as UniqueID,
@@ -128,6 +136,7 @@ class __$UserCopyWithImpl<$Res> extends _$OOGLOOUserCopyWithImpl<$Res>
       phoneNumber: phoneNumber == freezed
           ? _value.phoneNumber
           : phoneNumber as PhoneNumber,
+      gender: gender == freezed ? _value.gender : gender as String,
     ));
   }
 }
@@ -139,12 +148,14 @@ class _$_User implements _User {
       @required this.emailAddress,
       @required this.password,
       @required this.username,
-      @required this.phoneNumber})
+      @required this.phoneNumber,
+      @required this.gender})
       : assert(uID != null),
         assert(emailAddress != null),
         assert(password != null),
         assert(username != null),
-        assert(phoneNumber != null);
+        assert(phoneNumber != null),
+        assert(gender != null);
 
   @override
   final UniqueID uID;
@@ -156,10 +167,12 @@ class _$_User implements _User {
   final Username username;
   @override
   final PhoneNumber phoneNumber;
+  @override
+  final String gender;
 
   @override
   String toString() {
-    return 'OOGLOOUser(uID: $uID, emailAddress: $emailAddress, password: $password, username: $username, phoneNumber: $phoneNumber)';
+    return 'OOGLOOUser(uID: $uID, emailAddress: $emailAddress, password: $password, username: $username, phoneNumber: $phoneNumber, gender: $gender)';
   }
 
   @override
@@ -179,7 +192,9 @@ class _$_User implements _User {
                     .equals(other.username, username)) &&
             (identical(other.phoneNumber, phoneNumber) ||
                 const DeepCollectionEquality()
-                    .equals(other.phoneNumber, phoneNumber)));
+                    .equals(other.phoneNumber, phoneNumber)) &&
+            (identical(other.gender, gender) ||
+                const DeepCollectionEquality().equals(other.gender, gender)));
   }
 
   @override
@@ -189,7 +204,8 @@ class _$_User implements _User {
       const DeepCollectionEquality().hash(emailAddress) ^
       const DeepCollectionEquality().hash(password) ^
       const DeepCollectionEquality().hash(username) ^
-      const DeepCollectionEquality().hash(phoneNumber);
+      const DeepCollectionEquality().hash(phoneNumber) ^
+      const DeepCollectionEquality().hash(gender);
 
   @override
   _$UserCopyWith<_User> get copyWith =>
@@ -202,7 +218,8 @@ abstract class _User implements OOGLOOUser {
       @required EmailAddress emailAddress,
       @required Password password,
       @required Username username,
-      @required PhoneNumber phoneNumber}) = _$_User;
+      @required PhoneNumber phoneNumber,
+      @required String gender}) = _$_User;
 
   @override
   UniqueID get uID;
@@ -214,6 +231,8 @@ abstract class _User implements OOGLOOUser {
   Username get username;
   @override
   PhoneNumber get phoneNumber;
+  @override
+  String get gender;
   @override
   _$UserCopyWith<_User> get copyWith;
 }

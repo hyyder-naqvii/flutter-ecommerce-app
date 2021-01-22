@@ -115,54 +115,51 @@ class UserProfile extends StatelessWidget {
     );
   }
 
-  SizedBox buildProfileImageOptions(BuildContext context, UsersState state) {
-    return SizedBox(
-      height: Responsive.width(50, context),
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            CircularIconButtonWithBorder(
-              borderWidth: 2,
-              size: Responsive.width(10, context),
-              icon: const Icon(
-                Icons.camera_alt,
-              ),
-              onPressedCallback: () {
-                context.read<UsersBloc>().add(
-                    const UsersEvent.updateCurrentUserProfilePic(
-                        removeInstead: false));
-              },
-              iconColor: iconColorLight,
-              buttonColor: Colors.white,
-              borderColor: iconColorLight,
+  Widget buildProfileImageOptions(BuildContext context, UsersState state) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0,horizontal: 5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          CircularIconButtonWithBorder(
+            borderWidth: 2,
+            size: Responsive.height(5, context),
+            icon: const Icon(
+              Icons.camera_alt,
             ),
-            const CircularGradientAvatar(
-              //TODO IMplement user profile image
-              // image: state.user.profilePic != null
-              //     ? MemoryImage(state.user.profilePic)
-              //     : null,
-              image: null,
-              defaultImagePath: 'lib/assets/images/default-user.png',
+            onPressedCallback: () {
+              context.read<UsersBloc>().add(
+                  const UsersEvent.updateCurrentUserProfilePic(
+                      removeInstead: false));
+            },
+            iconColor: iconColorLight,
+            buttonColor: Colors.white,
+            borderColor: iconColorLight,
+          ),
+          const CircularGradientAvatar(
+            //TODO IMplement user profile image
+            // image: state.user.profilePic != null
+            //     ? MemoryImage(state.user.profilePic)
+            //     : null,
+            image: null,
+            defaultImagePath: 'lib/assets/images/default-user.png',
+          ),
+          CircularIconButtonWithBorder(
+            borderWidth: 2,
+            size: Responsive.height(5, context),
+            icon: const Icon(
+              Icons.cancel,
             ),
-            CircularIconButtonWithBorder(
-              borderWidth: 2,
-              size: Responsive.width(10, context),
-              icon: const Icon(
-                Icons.cancel,
-              ),
-              onPressedCallback: () {
-                context.read<UsersBloc>().add(
-                    const UsersEvent.updateCurrentUserProfilePic(
-                        removeInstead: true));
-              },
-              iconColor: iconColorLight,
-              buttonColor: Colors.white,
-              borderColor: iconColorLight,
-            ),
-          ],
-        ),
+            onPressedCallback: () {
+              context.read<UsersBloc>().add(
+                  const UsersEvent.updateCurrentUserProfilePic(
+                      removeInstead: true));
+            },
+            iconColor: iconColorLight,
+            buttonColor: Colors.white,
+            borderColor: iconColorLight,
+          ),
+        ],
       ),
     );
   }

@@ -33,10 +33,11 @@ class CheckOutScreen extends StatelessWidget {
       ],
       child: Scaffold(
         appBar: buildAppBar(context),
-        body: Padding(
-          padding: const EdgeInsets.all(20.0),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
               const ScreenTitle(title: 'Checkout'),
               SizedBox(
@@ -53,21 +54,19 @@ class CheckOutScreen extends StatelessWidget {
                     },
                     loadSuccess: (cart) {
                       return cart.carts.isNotEmpty
-                          ? Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  CheckoutItemBuilder(
-                                    carts: cart.carts,
-                                  ),
-                                  Divider(
-                                    color: iconColorLight.withOpacity(0.6),
-                                    height: Responsive.height(3, context),
-                                  ),
-                                  const CheckoutBuilder(),
-                                ],
+                          ? Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CheckoutItemBuilder(
+                                carts: cart.carts,
                               ),
-                            )
+                              Divider(
+                                color: iconColorLight.withOpacity(0.6),
+                                height: Responsive.height(3, context),
+                              ),
+                              const CheckoutBuilder(),
+                            ],
+                          )
                           : Expanded(
                             child: Text(
                                 'No Products Added to Cart!',
@@ -84,33 +83,10 @@ class CheckOutScreen extends StatelessWidget {
                   );
                 },
               ),
+              SizedBox(height: Responsive.height(2, context),),
               BlocBuilder<CartActorBloc,CartActorState>(
                 builder: (context,state){
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: SizedBox(
-                      //width: Responsive.width(20, context),
-                      height: Responsive.height(8, context),
-                      child: GradientButton(
-                        gradientColors: [mainDarkColor, mainColor],
-                        label: Text(
-                          'Buy',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: Responsive.width(4.5, context),
-                              fontWeight: FontWeight.bold),
-                        ),
-                        onPressedCallback: () {
-                          Navigator.pushReplacementNamed(context, '/confirmation');
-                          context.read<CartActorBloc>().add(CartActorEvent.deleteAll(getIt<IAuthenticate>()
-                              .getSignedInUser()
-                              .uID
-                              .value
-                              .getOrElse(null)));
-                        },
-                      ),
-                    ),
-                  );
+                  return buildConfirmationButton(context);
                 },
 
               ),
@@ -121,6 +97,34 @@ class CheckOutScreen extends StatelessWidget {
 
       ),
     );
+  }
+
+  Padding buildConfirmationButton(BuildContext context) {
+    return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: SizedBox(
+                    //width: Responsive.width(20, context),
+                    height: Responsive.height(8, context),
+                    child: GradientButton(
+                      gradientColors: [mainDarkColor, mainColor],
+                      label: Text(
+                        'Buy',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: Responsive.width(4.5, context),
+                            fontWeight: FontWeight.bold),
+                      ),
+                      onPressedCallback: () {
+                        Navigator.pushReplacementNamed(context, '/confirmation');
+                        context.read<CartActorBloc>().add(CartActorEvent.deleteAll(getIt<IAuthenticate>()
+                            .getSignedInUser()
+                            .uID
+                            .value
+                            .getOrElse(null)));
+                      },
+                    ),
+                  ),
+                );
   }
 }
 
@@ -135,37 +139,35 @@ class CheckoutBuilder extends StatelessWidget {
       builder: (context, state) {
         return state.maybeMap(
             totalRequested: (checkout) {
-              return Expanded(
-                child: Container(
-                  color: Colors.grey[100],
-                  child: Column(
-                    children: [
-                       CheckoutInfo(
-                        labelColor: textColorLight,
-                        label: 'Subtotal',
-                        data: checkout.checkOutData.subTotal,
-                         dataSymbolPrefix: '\$',
-                      ),
-                      CheckoutInfo(
-                        labelColor: textColorLight,
-                        label: 'Discount',
-                        data: checkout.checkOutData.discount,
-                        dataSymbolSuffix: '%',
-                      ),
-                      CheckoutInfo(
-                        labelColor: textColorLight,
-                        label: 'Shipping',
-                        data: checkout.checkOutData.shipping,
-                        dataSymbolPrefix: '\$',
-                      ),
-                      CheckoutInfo(
-                        labelColor: textColor,
-                        label: 'Total',
-                        data: checkout.checkOutData.calculateTotal().ceil(),
-                        dataSymbolPrefix: '\$',
-                      ),
-                    ],
-                  ),
+              return Container(
+                color: Colors.grey[100],
+                child: Column(
+                  children: [
+                     CheckoutInfo(
+                      labelColor: textColorLight,
+                      label: 'Subtotal',
+                      data: checkout.checkOutData.subTotal,
+                       dataSymbolPrefix: '\$',
+                    ),
+                    CheckoutInfo(
+                      labelColor: textColorLight,
+                      label: 'Discount',
+                      data: checkout.checkOutData.discount,
+                      dataSymbolSuffix: '%',
+                    ),
+                    CheckoutInfo(
+                      labelColor: textColorLight,
+                      label: 'Shipping',
+                      data: checkout.checkOutData.shipping,
+                      dataSymbolPrefix: '\$',
+                    ),
+                    CheckoutInfo(
+                      labelColor: textColor,
+                      label: 'Total',
+                      data: checkout.checkOutData.calculateTotal().ceil(),
+                      dataSymbolPrefix: '\$',
+                    ),
+                  ],
                 ),
               );
             },

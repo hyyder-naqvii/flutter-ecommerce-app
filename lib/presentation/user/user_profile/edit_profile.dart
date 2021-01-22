@@ -49,7 +49,7 @@ class EditProfile extends StatelessWidget{
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               buildNameField(initialUser,context),
-                              //buildGenderField(state.user, context),
+                              buildGenderField(initialUser, context),
                               buildPhoneNumberField(initialUser,context),
                               SizedBox(
                                 width: double.infinity,
@@ -85,28 +85,28 @@ class EditProfile extends StatelessWidget{
     );
   }
 
-  // Widget buildGenderField(
-  //     OOGLOOUser userDataProvider, BuildContext context) {
-  //   return Padding(
-  //     padding: const EdgeInsets.symmetric(vertical : 10.0),
-  //     child: DropdownButtonFormField(
-  //       value: 'Male',
-  //       decoration: formStyleMain.copyWith(labelText: "Gender"),
-  //       items: <String>['','Male', 'Female', 'Other']
-  //           .map<DropdownMenuItem<String>>((String value) {
-  //         return DropdownMenuItem<String>(
-  //           value: value,
-  //           child: Text(value),
-  //         );
-  //       }).toList(),
-  //       onChanged: (String value) {
-  //         context
-  //             .read<AuthenticationBloc>()
-  //             .add(AuthenticationEvent.genderChanged(value));
-  //       },
-  //     ),
-  //   );
-  // }
+  Widget buildGenderField(
+      OOGLOOUser userDataProvider, BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical : 10.0),
+      child: DropdownButtonFormField(
+        value: initialUser.gender??'Male',
+        decoration: formStyleMain.copyWith(labelText: "Gender"),
+        items: OOGLOOUser.genders
+            .map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
+        onChanged: (String value) {
+          context
+              .read<AuthenticationBloc>()
+              .add(AuthenticationEvent.genderChanged(value));
+        },
+      ),
+    );
+  }
 
   Widget buildPhoneNumberField(OOGLOOUser userDataProvider, BuildContext context) {
     return Padding(

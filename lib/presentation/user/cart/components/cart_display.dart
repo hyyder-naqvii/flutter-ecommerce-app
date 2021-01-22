@@ -29,9 +29,9 @@ class CartDisplay extends StatelessWidget {
           return Stack(children: [
             Container(
               margin: const EdgeInsets.only(bottom: 20),
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.symmetric(vertical: 5,horizontal: 5),
               width: double.infinity,
-              height: Responsive.height(22, context),
+              height: Responsive.height(25, context),
               decoration: BoxDecoration(color: Colors.white, boxShadow: [
                 BoxShadow(
                     color: iconColorLight.withOpacity(0.7),
@@ -39,11 +39,11 @@ class CartDisplay extends StatelessWidget {
                     blurRadius: 10),
               ]),
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    width: Responsive.width(32, context),
-                    height: Responsive.width(32, context),
+                    width: Responsive.height(15, context),
+                    height: Responsive.height(15, context),
                     child: state.maybeMap(
                         loadSuccess: (product) => product.products.isNotEmpty
                             ? Image.memory(
@@ -55,12 +55,12 @@ class CartDisplay extends StatelessWidget {
                               ),
                         orElse: () => Text('Image')),
                   ),
-                  SizedBox(
-                    width: Responsive.width(1.5, context),
-                  ),
+                   SizedBox(width: Responsive.height(2, context),),
+
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         AutoSizeText(
                           state.maybeMap(
@@ -104,8 +104,8 @@ class CartDisplay extends StatelessWidget {
                         Row(
                           children: [
                             SizedBox(
-                              width: Responsive.width(10, context),
-                              height: Responsive.width(10, context),
+                              width: Responsive.height(4, context),
+                              height: Responsive.height(4, context),
                               child: FlatButton(
                                 padding: EdgeInsets.all(2),
                                 color: Colors.grey[300],
@@ -125,8 +125,8 @@ class CartDisplay extends StatelessWidget {
                               width: 1,
                             ),
                             Container(
-                              width: Responsive.width(25, context),
-                              height: Responsive.width(10, context),
+                              width: Responsive.height(7, context),
+                              height: Responsive.height(4, context),
                               color: Colors.grey[300],
                               child: Center(
                                 child: Text('${cart.productQuantity}',style: TextStyle(
@@ -139,8 +139,8 @@ class CartDisplay extends StatelessWidget {
                               width: 1,
                             ),
                             SizedBox(
-                              width: Responsive.width(10, context),
-                              height: Responsive.width(10, context),
+                              width: Responsive.height(4, context),
+                              height: Responsive.height(4, context),
                               child: FlatButton(
                                 padding: EdgeInsets.all(2),
                                 color: Colors.grey[300],

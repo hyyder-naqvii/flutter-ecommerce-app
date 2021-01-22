@@ -10,10 +10,7 @@ import 'package:ecommerce_app/domain/auth/value_objects/phone_no.dart';
 import 'package:ecommerce_app/domain/auth/value_objects/username.dart';
 import 'package:ecommerce_app/domain/entities/user.dart';
 import 'package:ecommerce_app/domain/user/interface/i_user_repository.dart';
-import 'package:ecommerce_app/infrastructure/database/core/obay_database.dart';
-import 'package:ecommerce_app/infrastructure/database/tables/users/users_table.dart';
 import 'package:injectable/injectable.dart';
-import 'package:moor/moor.dart';
 
 import 'authentication_event.dart';
 import 'authentication_state.dart';
@@ -29,7 +26,8 @@ class AuthenticationBloc
 
   @override
   Stream<AuthenticationState> mapEventToState(
-      AuthenticationEvent event,) async* {
+    AuthenticationEvent event,
+  ) async* {
     yield* event.map(
       resetState: (e) async* {
         yield state.copyWith(
@@ -98,13 +96,13 @@ class AuthenticationBloc
 
         if (failureOrSuccess != null && failureOrSuccess.isRight()) {
           final OOGLOOUser user = OOGLOOUser(
-              uID: _authenticate
-                  .getSignedInUser()
-                  .uID,
-              emailAddress: state.emailAddress,
-              password: state.password,
-              username: state.username,
-              phoneNumber: PhoneNumber(''));
+            uID: _authenticate.getSignedInUser().uID,
+            emailAddress: state.emailAddress,
+            password: state.password,
+            username: state.username,
+            phoneNumber: PhoneNumber(''),
+            gender: OOGLOOUser.genders[0],
+          );
           _iUserRepository.insertNewUser(user);
         }
 
@@ -140,7 +138,6 @@ class AuthenticationBloc
         );
       },
       profileInformationUpdated: (e) async* {
-
         yield state.copyWith(
           isValidating: true,
           authStateOption: none(),
@@ -148,31 +145,28 @@ class AuthenticationBloc
         final isUsernameValid = state.username.isValid();
         final isPhoneNoValid = state.phoneNumber.isValid();
         if (isUsernameValid && isPhoneNoValid) {
+          final OOGLOOUser user = await _iUserRepository
+              .getUserWithID(
+                  _authenticate.getSignedInUser().uID.value.getOrElse(null))
+              .then((value) => value.getOrElse(null));
 
-          final OOGLOOUser user = await _iUserRepository.getUserWithID(_authenticate.getSignedInUser().uID.value.getOrElse(null)).then((value) => value.getOrElse(null));
-
-          final updateFailureOrSuccess = await _iUserRepository.updateUserData(user.copyWith(
-            username : state.username,
-            phoneNumber : state.phoneNumber,
+          final updateFailureOrSuccess =
+              await _iUserRepository.updateUserData(user.copyWith(
+            username: state.username,
+            phoneNumber: state.phoneNumber,
+            gender: state.gender,
           ));
           yield state.copyWith(
             isValidating: false,
             showErrorMessages: updateFailureOrSuccess.isRight(),
-
           );
-
-        }
-        else{
+        } else {
           yield state.copyWith(
             isValidating: false,
             showErrorMessages: true,
-
           );
         }
-
       },
-
     );
   }
-
 }

@@ -15,7 +15,7 @@ class ScreenTitle extends StatelessWidget {
       title,
       style: TextStyle(
         color: textColor,
-        fontSize: Responsive.width(7, context),
+        fontSize: Responsive.height(3.5, context),
         letterSpacing: 1.5,
       ),
     );

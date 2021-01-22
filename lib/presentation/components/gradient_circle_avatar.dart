@@ -16,24 +16,15 @@ class CircularGradientAvatar extends StatelessWidget {
       alignment: Alignment.center,
       children: [
         CircleAvatar(
-          radius: Responsive.width(30, context),
+          radius: Responsive.height(11, context),
           child: Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
+            decoration:  BoxDecoration(
               gradient: LinearGradient(
                 colors: [
                   mainDarkColor,
                   mainColor,
                 ],
               ),
-            ),
-          ),
-        ),
-        CircleAvatar(
-          radius: Responsive.width(21, context),
-          child: Container(
-            decoration: const BoxDecoration(
-              color: Colors.white,
               shape: BoxShape.circle,
 
             ),
@@ -41,11 +32,11 @@ class CircularGradientAvatar extends StatelessWidget {
         ),
         if (image == null) CircleAvatar(
 
-          radius: Responsive.width(19, context),
+          radius: Responsive.height(10, context),
           backgroundImage: AssetImage(defaultImagePath),
         ) ,
         if(image != null) CircleAvatar(
-          radius: Responsive.width(19, context),
+          radius:  Responsive.height(10, context),
           backgroundImage:image,
         ),
 

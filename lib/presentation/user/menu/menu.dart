@@ -18,7 +18,7 @@ class Menu extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back_ios,
@@ -146,7 +146,7 @@ class SearchBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(5),
       width: double.infinity,
       decoration: BoxDecoration(
           color: Colors.white,
@@ -179,11 +179,11 @@ class ProductDisplaySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          crossAxisSpacing: 20.0,
-          mainAxisSpacing: 8.0,
-          childAspectRatio: 0.5),
+          crossAxisSpacing: 15.0,
+          mainAxisSpacing: 15.0,
+          childAspectRatio: Responsive.height(0.1, context)),
       itemCount: products.length,
       itemBuilder: (BuildContext context, int index) {
         return ProductDisplay(
@@ -202,11 +202,11 @@ class ProductLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 20.0,
           mainAxisSpacing: 8.0,
-          childAspectRatio: 0.8),
+          childAspectRatio: Responsive.height(0.1, context)),
       shrinkWrap: true,
       itemCount: 6,
       itemBuilder: (BuildContext context, int index) {

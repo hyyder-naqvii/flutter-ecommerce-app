@@ -17,23 +17,19 @@ class CategoryTile extends StatelessWidget {
     return GestureDetector(
       onTap: () => eventHandlerBloc.add(ProductLoaderEvent.getByCategory(category.categoryName)),
       child: Container(
-        width: Responsive.width(30, context),
-        height: Responsive.height(10, context),
+        width: Responsive.width(25, context),
+        height: Responsive.height(8, context),
         margin: EdgeInsets.symmetric(
             horizontal: Responsive.width(2.5, context),
             vertical: Responsive.height(2.5, context)),
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: iconColorMain.withOpacity(0.3),
-              offset: const Offset(0, 5),
-              blurRadius: 5,
-            ),
-            BoxShadow(
-              color: iconColorMain.withOpacity(0.5),
-              offset: const Offset(0, 10),
+              color: iconColorMain.withOpacity(0.8),
+              offset: const Offset(0, 3),
               blurRadius: 15,
             ),
+
           ],
         ),
         child: Stack(
@@ -53,8 +49,8 @@ class CategoryTile extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(colors: [
-                    Colors.black.withOpacity(0.5),
-                    mainDarkColor.withOpacity(0.2)
+                    Colors.black.withOpacity(0.6),
+                    Colors.white.withOpacity(0.1)
                   ]),
                 ),
               ),
@@ -64,7 +60,7 @@ class CategoryTile extends StatelessWidget {
               category.categoryName,
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: Responsive.width(4.5, context),
+                  fontSize: Responsive.height(2.2, context),
                   fontWeight: FontWeight.bold,
                   letterSpacing: 2),
             )),

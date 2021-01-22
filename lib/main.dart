@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:ecommerce_app/application/products/product_form/product_form_bloc.dart';
 import 'package:ecommerce_app/application/users/users_bloc.dart';
 import 'package:ecommerce_app/presentation/core/home.dart';
@@ -20,18 +21,28 @@ TODO Create Favourites Feature
 */
 
 
+
+
 void main() async {
   WidgetsFlutterBinding
       .ensureInitialized(); // need explicit binding before new Firebase call
   await Firebase.initializeApp(); // new Firebase call;
   configureInjection(Environment.prod);
-  runApp(MultiBlocProvider(providers: [
-    BlocProvider<AuthenticationBloc>(
-      create: (context) => getIt<AuthenticationBloc>(),
+  runApp(
+    DevicePreview(
+      enabled: false,
+      builder: (context) {
+        return MultiBlocProvider(providers: [
+          BlocProvider<AuthenticationBloc>(
+            create: (context) => getIt<AuthenticationBloc>(),
+          ),
+          BlocProvider<AuthBloc>(
+            create: (context) =>
+            getIt<AuthBloc>()..add(const AuthEvent.requestAuthState()),
+          ),
+        ], child: Home());
+      },
     ),
-    BlocProvider<AuthBloc>(
-      create: (context) =>
-          getIt<AuthBloc>()..add(const AuthEvent.requestAuthState()),
-    ),
-  ], child: Home()));
+  );
+
 }

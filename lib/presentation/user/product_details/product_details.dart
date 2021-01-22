@@ -60,50 +60,17 @@ class ProductDetails extends StatelessWidget {
                   'Description',
                   style: TextStyle(
                     color: textColor,
-                    fontSize: Responsive.width(4.5, context),
+                    fontSize: Responsive.width(6, context),
                   ),
                 ),
                 buildDescriptionBox(context),
                 SizedBox(
                   height: Responsive.height(2, context),
                 ),
+
                 BlocBuilder<CartActorBloc, CartActorState>(
                     builder: (context, state) {
-                  return SizedBox(
-                    width: double.infinity,
-                    child: FlatButton(
-                      padding: EdgeInsets.all(20),
-                      color: mainDarkColor,
-                      onPressed: () {
-                        final Cart cart = Cart(
-                          userID: getIt<IAuthenticate>()
-                              .getSignedInUser()
-                              .uID
-                              .value
-                              .getOrElse(null),
-                          productID:
-                              product.getOrElse(null).uID.value.getOrElse(null),
-                          productQuantity: 1,
-                          totalPrice: int.parse(product
-                              .getOrElse(null)
-                              .productPrice
-                              .value
-                              .getOrElse(null)),
-                        );
-                        context
-                            .read<CartActorBloc>()
-                            .add(CartActorEvent.addCart(cart));
-                      },
-                      child: Text(
-                        'Add To Cart',
-                        style: TextStyle(
-                          fontSize: Responsive.width(4.5, context),
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  );
+                  return buildAddtoCartButton(context);
                 }),
               ],
             ),
@@ -111,6 +78,44 @@ class ProductDetails extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  SizedBox buildAddtoCartButton(BuildContext context) {
+    return SizedBox(
+                  width: double.infinity,
+                  child: FlatButton(
+                    padding: EdgeInsets.all(20),
+                    color: mainDarkColor,
+                    onPressed: () {
+                      final Cart cart = Cart(
+                        userID: getIt<IAuthenticate>()
+                            .getSignedInUser()
+                            .uID
+                            .value
+                            .getOrElse(null),
+                        productID:
+                            product.getOrElse(null).uID.value.getOrElse(null),
+                        productQuantity: 1,
+                        totalPrice: int.parse(product
+                            .getOrElse(null)
+                            .productPrice
+                            .value
+                            .getOrElse(null)),
+                      );
+                      context
+                          .read<CartActorBloc>()
+                          .add(CartActorEvent.addCart(cart));
+                    },
+                    child: Text(
+                      'Add To Cart',
+                      style: TextStyle(
+                        fontSize: Responsive.width(4.5, context),
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                );
   }
 
   Container buildDescriptionBox(BuildContext context) {
@@ -124,7 +129,7 @@ class ProductDetails extends StatelessWidget {
       child: ReadMoreText(
         product.getOrElse(null).productDescription.value.getOrElse(null),
         style: TextStyle(
-          fontSize: Responsive.width(4, context),
+          fontSize: Responsive.width(4.5, context),
           color: textColorLight,
         ),
         trimLines: 5,
@@ -152,7 +157,8 @@ class ProductDetails extends StatelessWidget {
               letterSpacing: 2),
         ),
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          width: Responsive.width(25, context),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           decoration: BoxDecoration(
             color: mainDarkColor,
             borderRadius: BorderRadius.circular(15),
@@ -183,7 +189,7 @@ class ProductDetails extends StatelessWidget {
         ],
       ),
       width: double.infinity,
-      height: Responsive.height(25, context),
+      height: Responsive.height(30, context),
       child: product.getOrElse(null).productImage.isNotEmpty
           ? Image.memory(
               product.getOrElse(null).productImage,

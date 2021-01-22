@@ -8,30 +8,32 @@ class ProductMenuSkeleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Shimmer.fromColors(
-            highlightColor:
-            iconColorLight.withOpacity(0.5),
-            baseColor:
-            iconColorLight.withOpacity(0.3),
-            child: Container(
-              width: Responsive.width(45, context),
-              height: Responsive.width(40, context),
-              color: mainColor,
-            )),
-        const SizedBox(height: 5,),
-        Shimmer.fromColors(
-            highlightColor:
-            iconColorLight.withOpacity(0.5),
-            baseColor:
-            iconColorLight.withOpacity(0.3),
-            child: Container(
-              width: Responsive.width(45, context),
-              height: Responsive.width(10, context),
-              color: mainColor,
-            )),
-      ],
+    return FittedBox(
+      child: Column(
+        children: [
+          Shimmer.fromColors(
+              highlightColor:
+              iconColorLight.withOpacity(0.5),
+              baseColor:
+              iconColorLight.withOpacity(0.3),
+              child: Container(
+                width: Responsive.width(45, context),
+                height: Responsive.width(40, context),
+                color: mainColor,
+              )),
+          const SizedBox(height: 5,),
+          Shimmer.fromColors(
+              highlightColor:
+              iconColorLight.withOpacity(0.5),
+              baseColor:
+              iconColorLight.withOpacity(0.3),
+              child: Container(
+                width: Responsive.width(45, context),
+                height: Responsive.width(10, context),
+                color: mainColor,
+              )),
+        ],
+      ),
     );
   }
 }

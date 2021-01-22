@@ -93,7 +93,7 @@ class FirebaseAuthenticate implements IAuthenticate {
         emailAddress: EmailAddress(_firebaseAuth.currentUser.email),
         username: Username(''),
         password: Password(''),
-        phoneNumber: PhoneNumber(''),
+        phoneNumber: PhoneNumber(''), gender: '',
       );
     }
 
