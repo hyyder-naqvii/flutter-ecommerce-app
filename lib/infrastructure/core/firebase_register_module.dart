@@ -11,4 +11,6 @@ abstract class FirebaseAuthenticateRegisterModule {
   FirebaseAuth get firebaseAuth => FirebaseAuth.instance;
   @lazySingleton
   FirebaseFirestore get firebaseFirestore => FirebaseFirestore.instance;
+  @lazySingleton
+  Fire get firebaseFirestore => FirebaseFirestore.instance;
 }
