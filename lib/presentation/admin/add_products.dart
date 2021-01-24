@@ -257,7 +257,9 @@ class ProductNameField extends StatelessWidget {
 
 // ignore: always_declare_return_types
 _pickProductImage(BuildContext context) async {
-  final Uint8List image = await ImagePickerUtility.pickImageFromCamera();
+  //Todo implement cloud storage for product image!
+  final  imageFile = await ImagePickerUtility.pickImageFromGallery();
+  final Uint8List image = imageFile.readAsBytesSync();
   context.read<ProductFormBloc>().add(
       ProductFormEvent.productImageChanged(image ?? Uint8List.fromList([])));
 }
@@ -284,10 +286,12 @@ SizedBox buildProductImageSection(
             buttonColor: Colors.white,
             borderColor: iconColorLight,
           ),
-          CircularGradientAvatar(
-            image: state.product.productImage.isNotEmpty
-                ? MemoryImage(state.product.productImage)
-                : null,
+          const CircularGradientAvatar(
+            //Todo implement product image selection
+            // image: state.product.productImage.isNotEmpty
+            //     ? MemoryImage(state.product.productImage)
+            //     : null,
+            image: null,
             defaultImagePath: 'lib/assets/images/no-image.png',
           ),
           CircularIconButtonWithBorder(

@@ -15,9 +15,7 @@ class Confirmation extends StatelessWidget {
                 flex: 4,
                 child: Image.asset('lib/assets/images/confirmation.png')),
             Expanded(
-              flex: 1,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
                     'Confirmation',
@@ -36,7 +34,7 @@ class Confirmation extends StatelessWidget {
             ),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 15),
-          margin: EdgeInsets.all(10),
+          margin: const EdgeInsets.all(10),
           child: SizedBox(
             //width: Responsive.width(20, context),
             height: Responsive.height(8, context),

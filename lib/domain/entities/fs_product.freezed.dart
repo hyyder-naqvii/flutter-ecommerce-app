@@ -45,6 +45,7 @@ mixin _$FSProduct {
   Uint8List get productImage;
   String get category;
 
+  @JsonKey(ignore: true)
   $FSProductCopyWith<FSProduct> get copyWith;
 }
 
@@ -217,6 +218,7 @@ class _$_FSProduct extends _FSProduct {
       const DeepCollectionEquality().hash(productImage) ^
       const DeepCollectionEquality().hash(category);
 
+  @JsonKey(ignore: true)
   @override
   _$FSProductCopyWith<_FSProduct> get copyWith =>
       __$FSProductCopyWithImpl<_FSProduct>(this, _$identity);
@@ -245,5 +247,6 @@ abstract class _FSProduct extends FSProduct {
   @override
   String get category;
   @override
+  @JsonKey(ignore: true)
   _$FSProductCopyWith<_FSProduct> get copyWith;
 }

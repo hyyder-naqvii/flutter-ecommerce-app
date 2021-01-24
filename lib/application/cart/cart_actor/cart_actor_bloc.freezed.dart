@@ -171,6 +171,7 @@ class _$_DeleteCart implements _DeleteCart {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(cart);
 
+  @JsonKey(ignore: true)
   @override
   _$DeleteCartCopyWith<_DeleteCart> get copyWith =>
       __$DeleteCartCopyWithImpl<_DeleteCart>(this, _$identity);
@@ -254,6 +255,7 @@ abstract class _DeleteCart implements CartActorEvent {
   const factory _DeleteCart(Cart cart) = _$_DeleteCart;
 
   Cart get cart;
+  @JsonKey(ignore: true)
   _$DeleteCartCopyWith<_DeleteCart> get copyWith;
 }
 
@@ -307,6 +309,7 @@ class _$_AddCart implements _AddCart {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(cart);
 
+  @JsonKey(ignore: true)
   @override
   _$AddCartCopyWith<_AddCart> get copyWith =>
       __$AddCartCopyWithImpl<_AddCart>(this, _$identity);
@@ -390,6 +393,7 @@ abstract class _AddCart implements CartActorEvent {
   const factory _AddCart(Cart cart) = _$_AddCart;
 
   Cart get cart;
+  @JsonKey(ignore: true)
   _$AddCartCopyWith<_AddCart> get copyWith;
 }
 
@@ -446,6 +450,7 @@ class _$_IncreaseQuantity implements _IncreaseQuantity {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(cart);
 
+  @JsonKey(ignore: true)
   @override
   _$IncreaseQuantityCopyWith<_IncreaseQuantity> get copyWith =>
       __$IncreaseQuantityCopyWithImpl<_IncreaseQuantity>(this, _$identity);
@@ -529,6 +534,7 @@ abstract class _IncreaseQuantity implements CartActorEvent {
   const factory _IncreaseQuantity(Cart cart) = _$_IncreaseQuantity;
 
   Cart get cart;
+  @JsonKey(ignore: true)
   _$IncreaseQuantityCopyWith<_IncreaseQuantity> get copyWith;
 }
 
@@ -585,6 +591,7 @@ class _$_DecreaseQuantity implements _DecreaseQuantity {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(cart);
 
+  @JsonKey(ignore: true)
   @override
   _$DecreaseQuantityCopyWith<_DecreaseQuantity> get copyWith =>
       __$DecreaseQuantityCopyWithImpl<_DecreaseQuantity>(this, _$identity);
@@ -668,6 +675,7 @@ abstract class _DecreaseQuantity implements CartActorEvent {
   const factory _DecreaseQuantity(Cart cart) = _$_DecreaseQuantity;
 
   Cart get cart;
+  @JsonKey(ignore: true)
   _$DecreaseQuantityCopyWith<_DecreaseQuantity> get copyWith;
 }
 
@@ -722,6 +730,7 @@ class _$_DeleteAll implements _DeleteAll {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(userID);
 
+  @JsonKey(ignore: true)
   @override
   _$DeleteAllCopyWith<_DeleteAll> get copyWith =>
       __$DeleteAllCopyWithImpl<_DeleteAll>(this, _$identity);
@@ -805,6 +814,7 @@ abstract class _DeleteAll implements CartActorEvent {
   const factory _DeleteAll(String userID) = _$_DeleteAll;
 
   String get userID;
+  @JsonKey(ignore: true)
   _$DeleteAllCopyWith<_DeleteAll> get copyWith;
 }
 
@@ -861,6 +871,7 @@ class _$_CalculateTotal implements _CalculateTotal {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(userID);
 
+  @JsonKey(ignore: true)
   @override
   _$CalculateTotalCopyWith<_CalculateTotal> get copyWith =>
       __$CalculateTotalCopyWithImpl<_CalculateTotal>(this, _$identity);
@@ -944,6 +955,7 @@ abstract class _CalculateTotal implements CartActorEvent {
   const factory _CalculateTotal(String userID) = _$_CalculateTotal;
 
   String get userID;
+  @JsonKey(ignore: true)
   _$CalculateTotalCopyWith<_CalculateTotal> get copyWith;
 }
 
@@ -1309,6 +1321,7 @@ class _$_TotalRequested implements _TotalRequested {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(checkOutData);
 
+  @JsonKey(ignore: true)
   @override
   _$TotalRequestedCopyWith<_TotalRequested> get copyWith =>
       __$TotalRequestedCopyWithImpl<_TotalRequested>(this, _$identity);
@@ -1386,6 +1399,7 @@ abstract class _TotalRequested implements CartActorState {
   const factory _TotalRequested(CheckOutData checkOutData) = _$_TotalRequested;
 
   CheckOutData get checkOutData;
+  @JsonKey(ignore: true)
   _$TotalRequestedCopyWith<_TotalRequested> get copyWith;
 }
 

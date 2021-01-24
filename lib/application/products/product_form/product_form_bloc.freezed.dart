@@ -183,6 +183,7 @@ class _$_InitializeProduct implements _InitializeProduct {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(product);
 
+  @JsonKey(ignore: true)
   @override
   _$InitializeProductCopyWith<_InitializeProduct> get copyWith =>
       __$InitializeProductCopyWithImpl<_InitializeProduct>(this, _$identity);
@@ -274,6 +275,7 @@ abstract class _InitializeProduct implements ProductFormEvent {
       _$_InitializeProduct;
 
   Option<FSProduct> get product;
+  @JsonKey(ignore: true)
   _$InitializeProductCopyWith<_InitializeProduct> get copyWith;
 }
 
@@ -331,6 +333,7 @@ class _$_ProductNameChanged implements _ProductNameChanged {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(productName);
 
+  @JsonKey(ignore: true)
   @override
   _$ProductNameChangedCopyWith<_ProductNameChanged> get copyWith =>
       __$ProductNameChangedCopyWithImpl<_ProductNameChanged>(this, _$identity);
@@ -421,6 +424,7 @@ abstract class _ProductNameChanged implements ProductFormEvent {
   const factory _ProductNameChanged(String productName) = _$_ProductNameChanged;
 
   String get productName;
+  @JsonKey(ignore: true)
   _$ProductNameChangedCopyWith<_ProductNameChanged> get copyWith;
 }
 
@@ -482,6 +486,7 @@ class _$_ProductCategoryChanged implements _ProductCategoryChanged {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(productCategory);
 
+  @JsonKey(ignore: true)
   @override
   _$ProductCategoryChangedCopyWith<_ProductCategoryChanged> get copyWith =>
       __$ProductCategoryChangedCopyWithImpl<_ProductCategoryChanged>(
@@ -574,6 +579,7 @@ abstract class _ProductCategoryChanged implements ProductFormEvent {
       _$_ProductCategoryChanged;
 
   String get productCategory;
+  @JsonKey(ignore: true)
   _$ProductCategoryChangedCopyWith<_ProductCategoryChanged> get copyWith;
 }
 
@@ -636,6 +642,7 @@ class _$_ProductDescriptionChanged implements _ProductDescriptionChanged {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(productDescription);
 
+  @JsonKey(ignore: true)
   @override
   _$ProductDescriptionChangedCopyWith<_ProductDescriptionChanged>
       get copyWith =>
@@ -729,6 +736,7 @@ abstract class _ProductDescriptionChanged implements ProductFormEvent {
       _$_ProductDescriptionChanged;
 
   String get productDescription;
+  @JsonKey(ignore: true)
   _$ProductDescriptionChangedCopyWith<_ProductDescriptionChanged> get copyWith;
 }
 
@@ -787,6 +795,7 @@ class _$_ProductPriceChanged implements _ProductPriceChanged {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(productPrice);
 
+  @JsonKey(ignore: true)
   @override
   _$ProductPriceChangedCopyWith<_ProductPriceChanged> get copyWith =>
       __$ProductPriceChangedCopyWithImpl<_ProductPriceChanged>(
@@ -879,6 +888,7 @@ abstract class _ProductPriceChanged implements ProductFormEvent {
       _$_ProductPriceChanged;
 
   String get productPrice;
+  @JsonKey(ignore: true)
   _$ProductPriceChangedCopyWith<_ProductPriceChanged> get copyWith;
 }
 
@@ -937,6 +947,7 @@ class _$_ProductImageChanged implements _ProductImageChanged {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(productImage);
 
+  @JsonKey(ignore: true)
   @override
   _$ProductImageChangedCopyWith<_ProductImageChanged> get copyWith =>
       __$ProductImageChangedCopyWithImpl<_ProductImageChanged>(
@@ -1029,6 +1040,7 @@ abstract class _ProductImageChanged implements ProductFormEvent {
       _$_ProductImageChanged;
 
   Uint8List get productImage;
+  @JsonKey(ignore: true)
   _$ProductImageChangedCopyWith<_ProductImageChanged> get copyWith;
 }
 
@@ -1190,6 +1202,7 @@ mixin _$ProductFormState {
   bool get saved;
   Option<Either<ProductFailure, Unit>> get productStateOption;
 
+  @JsonKey(ignore: true)
   $ProductFormStateCopyWith<ProductFormState> get copyWith;
 }
 
@@ -1373,6 +1386,7 @@ class _$_ProductFormState implements _ProductFormState {
       const DeepCollectionEquality().hash(saved) ^
       const DeepCollectionEquality().hash(productStateOption);
 
+  @JsonKey(ignore: true)
   @override
   _$ProductFormStateCopyWith<_ProductFormState> get copyWith =>
       __$ProductFormStateCopyWithImpl<_ProductFormState>(this, _$identity);
@@ -1401,5 +1415,6 @@ abstract class _ProductFormState implements ProductFormState {
   @override
   Option<Either<ProductFailure, Unit>> get productStateOption;
   @override
+  @JsonKey(ignore: true)
   _$ProductFormStateCopyWith<_ProductFormState> get copyWith;
 }

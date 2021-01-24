@@ -7,7 +7,6 @@ import 'package:ecommerce_app/domain/entities/fs_product.dart';
 import 'package:ecommerce_app/domain/product/interface/i_product_repository.dart';
 import 'package:ecommerce_app/domain/product/value_objects/product_description.dart';
 import 'package:ecommerce_app/domain/product/value_objects/product_failure.dart';
-import 'package:ecommerce_app/domain/product/value_objects/product_image.dart';
 import 'package:ecommerce_app/domain/product/value_objects/product_name.dart';
 import 'package:ecommerce_app/domain/product/value_objects/product_price.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

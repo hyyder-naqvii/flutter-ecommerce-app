@@ -353,6 +353,7 @@ class _$_GetByCategory implements _GetByCategory {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(category);
 
+  @JsonKey(ignore: true)
   @override
   _$GetByCategoryCopyWith<_GetByCategory> get copyWith =>
       __$GetByCategoryCopyWithImpl<_GetByCategory>(this, _$identity);
@@ -424,6 +425,7 @@ abstract class _GetByCategory implements ProductLoaderEvent {
   const factory _GetByCategory(String category) = _$_GetByCategory;
 
   String get category;
+  @JsonKey(ignore: true)
   _$GetByCategoryCopyWith<_GetByCategory> get copyWith;
 }
 
@@ -481,6 +483,7 @@ class _$_GetByProductID implements _GetByProductID {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(productID);
 
+  @JsonKey(ignore: true)
   @override
   _$GetByProductIDCopyWith<_GetByProductID> get copyWith =>
       __$GetByProductIDCopyWithImpl<_GetByProductID>(this, _$identity);
@@ -552,6 +555,7 @@ abstract class _GetByProductID implements ProductLoaderEvent {
   const factory _GetByProductID(String productID) = _$_GetByProductID;
 
   String get productID;
+  @JsonKey(ignore: true)
   _$GetByProductIDCopyWith<_GetByProductID> get copyWith;
 }
 
@@ -897,6 +901,7 @@ class _$_LoadSuccess implements _LoadSuccess {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(products);
 
+  @JsonKey(ignore: true)
   @override
   _$LoadSuccessCopyWith<_LoadSuccess> get copyWith =>
       __$LoadSuccessCopyWithImpl<_LoadSuccess>(this, _$identity);
@@ -968,6 +973,7 @@ abstract class _LoadSuccess implements ProductLoaderState {
   const factory _LoadSuccess(List<FSProduct> products) = _$_LoadSuccess;
 
   List<FSProduct> get products;
+  @JsonKey(ignore: true)
   _$LoadSuccessCopyWith<_LoadSuccess> get copyWith;
 }
 
@@ -1040,6 +1046,7 @@ class _$_LoadFailure implements _LoadFailure {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(productFailure);
 
+  @JsonKey(ignore: true)
   @override
   _$LoadFailureCopyWith<_LoadFailure> get copyWith =>
       __$LoadFailureCopyWithImpl<_LoadFailure>(this, _$identity);
@@ -1111,5 +1118,6 @@ abstract class _LoadFailure implements ProductLoaderState {
   const factory _LoadFailure(ProductFailure productFailure) = _$_LoadFailure;
 
   ProductFailure get productFailure;
+  @JsonKey(ignore: true)
   _$LoadFailureCopyWith<_LoadFailure> get copyWith;
 }

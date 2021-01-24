@@ -33,14 +33,14 @@ class CheckOutItemDisplay extends StatelessWidget {
                     height : Responsive.width(22,context),
                     child: p.products.isNotEmpty ?
                     Image.memory( p.products[0].productImage):
-                    Image.asset('lib\assets\images\no-image.png'),
+                    Image.asset('lib/assets/images/no-image.png'),
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
 
                     children: [
                       AutoSizeText(
-                        '${p.products[0].productName.value.getOrElse(null)}',
+                        p.products[0].productName.value.getOrElse(null),
                         maxLines: 2,
                         style: TextStyle(
                           fontSize: Responsive.width(5, context),
@@ -72,7 +72,8 @@ class CheckOutItemDisplay extends StatelessWidget {
               ),
               orElse: ()=>Shimmer.fromColors(baseColor: iconColorMain,
                   highlightColor: iconColorLight,
-                  child: Center(child: const Text('Loading'))));
+                  child: const Center(child:
+                  Text('Loading'))));
         },
 
       ),

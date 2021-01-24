@@ -23,7 +23,8 @@ class _$UserDTOTearOff {
       @required String password,
       @required String username,
       @required String phoneNo,
-      @required String gender}) {
+      @required String gender,
+      @required String profilePicUrl}) {
     return _UserDTO(
       uID: uID,
       email: email,
@@ -31,6 +32,7 @@ class _$UserDTOTearOff {
       username: username,
       phoneNo: phoneNo,
       gender: gender,
+      profilePicUrl: profilePicUrl,
     );
   }
 
@@ -53,8 +55,10 @@ mixin _$UserDTO {
   String get username;
   String get phoneNo;
   String get gender;
+  String get profilePicUrl;
 
   Map<String, dynamic> toJson();
+  @JsonKey(ignore: true)
   $UserDTOCopyWith<UserDTO> get copyWith;
 }
 
@@ -68,7 +72,8 @@ abstract class $UserDTOCopyWith<$Res> {
       String password,
       String username,
       String phoneNo,
-      String gender});
+      String gender,
+      String profilePicUrl});
 }
 
 /// @nodoc
@@ -87,6 +92,7 @@ class _$UserDTOCopyWithImpl<$Res> implements $UserDTOCopyWith<$Res> {
     Object username = freezed,
     Object phoneNo = freezed,
     Object gender = freezed,
+    Object profilePicUrl = freezed,
   }) {
     return _then(_value.copyWith(
       uID: uID == freezed ? _value.uID : uID as String,
@@ -95,6 +101,9 @@ class _$UserDTOCopyWithImpl<$Res> implements $UserDTOCopyWith<$Res> {
       username: username == freezed ? _value.username : username as String,
       phoneNo: phoneNo == freezed ? _value.phoneNo : phoneNo as String,
       gender: gender == freezed ? _value.gender : gender as String,
+      profilePicUrl: profilePicUrl == freezed
+          ? _value.profilePicUrl
+          : profilePicUrl as String,
     ));
   }
 }
@@ -110,7 +119,8 @@ abstract class _$UserDTOCopyWith<$Res> implements $UserDTOCopyWith<$Res> {
       String password,
       String username,
       String phoneNo,
-      String gender});
+      String gender,
+      String profilePicUrl});
 }
 
 /// @nodoc
@@ -130,6 +140,7 @@ class __$UserDTOCopyWithImpl<$Res> extends _$UserDTOCopyWithImpl<$Res>
     Object username = freezed,
     Object phoneNo = freezed,
     Object gender = freezed,
+    Object profilePicUrl = freezed,
   }) {
     return _then(_UserDTO(
       uID: uID == freezed ? _value.uID : uID as String,
@@ -138,6 +149,9 @@ class __$UserDTOCopyWithImpl<$Res> extends _$UserDTOCopyWithImpl<$Res>
       username: username == freezed ? _value.username : username as String,
       phoneNo: phoneNo == freezed ? _value.phoneNo : phoneNo as String,
       gender: gender == freezed ? _value.gender : gender as String,
+      profilePicUrl: profilePicUrl == freezed
+          ? _value.profilePicUrl
+          : profilePicUrl as String,
     ));
   }
 }
@@ -152,12 +166,14 @@ class _$_UserDTO extends _UserDTO {
       @required this.password,
       @required this.username,
       @required this.phoneNo,
-      @required this.gender})
+      @required this.gender,
+      @required this.profilePicUrl})
       : assert(email != null),
         assert(password != null),
         assert(username != null),
         assert(phoneNo != null),
         assert(gender != null),
+        assert(profilePicUrl != null),
         super._();
 
   factory _$_UserDTO.fromJson(Map<String, dynamic> json) =>
@@ -176,10 +192,12 @@ class _$_UserDTO extends _UserDTO {
   final String phoneNo;
   @override
   final String gender;
+  @override
+  final String profilePicUrl;
 
   @override
   String toString() {
-    return 'UserDTO(uID: $uID, email: $email, password: $password, username: $username, phoneNo: $phoneNo, gender: $gender)';
+    return 'UserDTO(uID: $uID, email: $email, password: $password, username: $username, phoneNo: $phoneNo, gender: $gender, profilePicUrl: $profilePicUrl)';
   }
 
   @override
@@ -200,7 +218,10 @@ class _$_UserDTO extends _UserDTO {
                 const DeepCollectionEquality()
                     .equals(other.phoneNo, phoneNo)) &&
             (identical(other.gender, gender) ||
-                const DeepCollectionEquality().equals(other.gender, gender)));
+                const DeepCollectionEquality().equals(other.gender, gender)) &&
+            (identical(other.profilePicUrl, profilePicUrl) ||
+                const DeepCollectionEquality()
+                    .equals(other.profilePicUrl, profilePicUrl)));
   }
 
   @override
@@ -211,8 +232,10 @@ class _$_UserDTO extends _UserDTO {
       const DeepCollectionEquality().hash(password) ^
       const DeepCollectionEquality().hash(username) ^
       const DeepCollectionEquality().hash(phoneNo) ^
-      const DeepCollectionEquality().hash(gender);
+      const DeepCollectionEquality().hash(gender) ^
+      const DeepCollectionEquality().hash(profilePicUrl);
 
+  @JsonKey(ignore: true)
   @override
   _$UserDTOCopyWith<_UserDTO> get copyWith =>
       __$UserDTOCopyWithImpl<_UserDTO>(this, _$identity);
@@ -231,7 +254,8 @@ abstract class _UserDTO extends UserDTO {
       @required String password,
       @required String username,
       @required String phoneNo,
-      @required String gender}) = _$_UserDTO;
+      @required String gender,
+      @required String profilePicUrl}) = _$_UserDTO;
 
   factory _UserDTO.fromJson(Map<String, dynamic> json) = _$_UserDTO.fromJson;
 
@@ -249,5 +273,8 @@ abstract class _UserDTO extends UserDTO {
   @override
   String get gender;
   @override
+  String get profilePicUrl;
+  @override
+  @JsonKey(ignore: true)
   _$UserDTOCopyWith<_UserDTO> get copyWith;
 }

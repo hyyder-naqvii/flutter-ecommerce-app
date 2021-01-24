@@ -1,4 +1,4 @@
-import 'package:device_preview/device_preview.dart';
+
 import 'package:ecommerce_app/application/products/product_form/product_form_bloc.dart';
 import 'package:ecommerce_app/application/users/users_bloc.dart';
 import 'package:ecommerce_app/presentation/core/home.dart';
@@ -29,10 +29,7 @@ void main() async {
   await Firebase.initializeApp(); // new Firebase call;
   configureInjection(Environment.prod);
   runApp(
-    DevicePreview(
-      enabled: false,
-      builder: (context) {
-        return MultiBlocProvider(providers: [
+     MultiBlocProvider(providers: [
           BlocProvider<AuthenticationBloc>(
             create: (context) => getIt<AuthenticationBloc>(),
           ),
@@ -40,9 +37,7 @@ void main() async {
             create: (context) =>
             getIt<AuthBloc>()..add(const AuthEvent.requestAuthState()),
           ),
-        ], child: Home());
-      },
-    ),
-  );
+        ], child: Home())
 
+  );
 }

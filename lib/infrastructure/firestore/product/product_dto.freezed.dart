@@ -55,6 +55,7 @@ mixin _$FSProductDTO {
   String get productCategory;
 
   Map<String, dynamic> toJson();
+  @JsonKey(ignore: true)
   $FSProductDTOCopyWith<FSProductDTO> get copyWith;
 }
 
@@ -237,6 +238,7 @@ class _$_FSProductDTO extends _FSProductDTO {
       const DeepCollectionEquality().hash(productImage) ^
       const DeepCollectionEquality().hash(productCategory);
 
+  @JsonKey(ignore: true)
   @override
   _$FSProductDTOCopyWith<_FSProductDTO> get copyWith =>
       __$FSProductDTOCopyWithImpl<_FSProductDTO>(this, _$identity);
@@ -274,5 +276,6 @@ abstract class _FSProductDTO extends FSProductDTO {
   @override
   String get productCategory;
   @override
+  @JsonKey(ignore: true)
   _$FSProductDTOCopyWith<_FSProductDTO> get copyWith;
 }

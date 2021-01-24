@@ -269,6 +269,7 @@ mixin _$AuthState {
   bool get isAuthenticated;
   bool get isAdmin;
 
+  @JsonKey(ignore: true)
   $AuthStateCopyWith<AuthState> get copyWith;
 }
 
@@ -366,6 +367,7 @@ class _$_AuthState implements _AuthState {
       const DeepCollectionEquality().hash(isAuthenticated) ^
       const DeepCollectionEquality().hash(isAdmin);
 
+  @JsonKey(ignore: true)
   @override
   _$AuthStateCopyWith<_AuthState> get copyWith =>
       __$AuthStateCopyWithImpl<_AuthState>(this, _$identity);
@@ -380,5 +382,6 @@ abstract class _AuthState implements AuthState {
   @override
   bool get isAdmin;
   @override
+  @JsonKey(ignore: true)
   _$AuthStateCopyWith<_AuthState> get copyWith;
 }

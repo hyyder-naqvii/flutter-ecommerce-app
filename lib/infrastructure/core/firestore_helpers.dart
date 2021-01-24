@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_app/domain/auth/interface/iauthenticate.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 import '../../injection.dart';
 
@@ -26,3 +27,5 @@ extension DocumentReferenceX on DocumentReference{
   CollectionReference get userDataCollection => collection('user_data');
 
 }
+
+

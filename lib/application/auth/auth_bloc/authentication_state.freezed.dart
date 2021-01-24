@@ -57,6 +57,7 @@ mixin _$AuthenticationState {
   bool get updateSuccess;
   Option<Either<AuthFailure, Unit>> get authStateOption;
 
+  @JsonKey(ignore: true)
   $AuthenticationStateCopyWith<AuthenticationState> get copyWith;
 }
 
@@ -316,6 +317,7 @@ class _$_AuthenticationState
       const DeepCollectionEquality().hash(updateSuccess) ^
       const DeepCollectionEquality().hash(authStateOption);
 
+  @JsonKey(ignore: true)
   @override
   _$AuthenticationStateCopyWith<_AuthenticationState> get copyWith =>
       __$AuthenticationStateCopyWithImpl<_AuthenticationState>(
@@ -357,5 +359,6 @@ abstract class _AuthenticationState implements AuthenticationState {
   @override
   Option<Either<AuthFailure, Unit>> get authStateOption;
   @override
+  @JsonKey(ignore: true)
   _$AuthenticationStateCopyWith<_AuthenticationState> get copyWith;
 }

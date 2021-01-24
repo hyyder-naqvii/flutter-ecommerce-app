@@ -6,6 +6,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -16,7 +17,7 @@ import 'application/cart/cart_actor/cart_actor_bloc.dart';
 import 'infrastructure/database/tables/carts/carts_table.dart';
 import 'application/cart/cart_loader/cart_loader_bloc.dart';
 import 'infrastructure/auth/firebase_authenticate.dart';
-import 'infrastructure/core/firebase_authenticate_register_module.dart';
+import 'infrastructure/core/firebase_register_module.dart';
 import 'domain/auth/interface/iauthenticate.dart';
 import 'domain/cart/interface/i_cart_repository.dart';
 import 'domain/product/interface/i_product_repository.dart';
@@ -26,6 +27,7 @@ import 'infrastructure/database/core/obay_database.dart';
 import 'application/products/product_form/product_form_bloc.dart';
 import 'application/products/product_loader/product_loader_bloc.dart';
 import 'infrastructure/firestore/product/repository/product_repository.dart';
+import 'application/users/user_image/user_image_bloc.dart';
 import 'infrastructure/firestore/user/repository/user_repository.dart';
 import 'application/users/users_bloc.dart';
 
@@ -44,6 +46,8 @@ GetIt $initGetIt(
       () => firebaseAuthenticateRegisterModule.firebaseAuth);
   gh.lazySingleton<FirebaseFirestore>(
       () => firebaseAuthenticateRegisterModule.firebaseFirestore);
+  gh.lazySingleton<FirebaseStorage>(
+      () => firebaseAuthenticateRegisterModule.firebaseStorage);
   gh.lazySingleton<GoogleSignIn>(
       () => firebaseAuthenticateRegisterModule.googleSignIn);
   gh.lazySingleton<IAuthenticate>(
@@ -51,11 +55,13 @@ GetIt $initGetIt(
   gh.lazySingleton<IProductRepository>(
       () => ProductRepository(get<FirebaseFirestore>()));
   gh.lazySingleton<IUserRepository>(
-      () => UserRepository(get<FirebaseFirestore>()));
+      () => UserRepository(get<FirebaseFirestore>(), get<FirebaseStorage>()));
   gh.lazySingleton<ObayDatabase>(() => ObayDatabase());
   gh.factory<ProductFormBloc>(() => ProductFormBloc(get<IProductRepository>()));
   gh.factory<ProductLoaderBloc>(
       () => ProductLoaderBloc(get<IProductRepository>()));
+  gh.factory<UserImageBloc>(
+      () => UserImageBloc(get<IAuthenticate>(), get<IUserRepository>()));
   gh.factory<UsersBloc>(
       () => UsersBloc(get<IAuthenticate>(), get<IUserRepository>()));
   gh.factory<AuthBloc>(() => AuthBloc(get<IAuthenticate>()));

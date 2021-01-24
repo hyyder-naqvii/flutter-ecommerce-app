@@ -96,9 +96,9 @@ class Menu extends StatelessWidget {
         GestureDetector(
           onTap: () => context
               .read<ProductLoaderBloc>()
-              .add(ProductLoaderEvent.getAllProducts()),
+              .add(const ProductLoaderEvent.getAllProducts()),
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
             width: Responsive.width(15, context),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),

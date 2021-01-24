@@ -2,14 +2,13 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:ecommerce_app/domain/cart/interface/i_cart_repository.dart';
-import 'package:ecommerce_app/domain/entities/fs_product.dart';
 import 'package:ecommerce_app/domain/product/interface/i_product_repository.dart';
 import 'package:ecommerce_app/hardcoded/checkout_data.dart';
 import 'package:ecommerce_app/infrastructure/database/core/obay_database.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
-import 'package:moor/moor.dart';
+
 
 part 'cart_actor_bloc.freezed.dart';
 

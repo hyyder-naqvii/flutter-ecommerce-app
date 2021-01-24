@@ -18,7 +18,6 @@ class ProductDetails extends StatelessWidget {
 
   const ProductDetails({Key key, @required this.product}) : super(key: key);
 
-  void _addProductToCart() {}
 
   @override
   Widget build(BuildContext context) {

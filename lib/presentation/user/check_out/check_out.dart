@@ -231,8 +231,8 @@ class CheckoutItemBuilder extends StatelessWidget {
         itemCount: carts.length,
         itemBuilder: (BuildContext context, int index) {
           return Container(
-            margin: EdgeInsets.only(bottom: 10),
-            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 5),
+            margin: const EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
             width: Responsive.width(30, context),
             height: Responsive.height(15, context),
             decoration: BoxDecoration(

@@ -13,6 +13,7 @@ _$_UserDTO _$_$_UserDTOFromJson(Map<String, dynamic> json) {
     username: json['username'] as String,
     phoneNo: json['phoneNo'] as String,
     gender: json['gender'] as String,
+    profilePicUrl: json['profilePicUrl'] as String,
   );
 }
 
@@ -23,4 +24,5 @@ Map<String, dynamic> _$_$_UserDTOToJson(_$_UserDTO instance) =>
       'username': instance.username,
       'phoneNo': instance.phoneNo,
       'gender': instance.gender,
+      'profilePicUrl': instance.profilePicUrl,
     };

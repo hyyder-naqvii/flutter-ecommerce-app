@@ -17,6 +17,7 @@ abstract class OOGLOOUser with _$OOGLOOUser {
     @required Username username,
     @required PhoneNumber phoneNumber,
     @required String gender,
+    @required String profilePicUrl,
   }
       ) = _User;
 

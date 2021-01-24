@@ -24,10 +24,10 @@ class _$UsersEventTearOff {
   }
 
 // ignore: unused_element
-  UpdateCurrentUserProfilePic updateCurrentUserProfilePic(
-      {@required bool removeInstead}) {
-    return UpdateCurrentUserProfilePic(
-      removeInstead: removeInstead,
+  UserRecieved userReceived(
+      Either<UserFailure, OOGLOOUser> userFailureOrSuccess) {
+    return UserRecieved(
+      userFailureOrSuccess,
     );
   }
 }
@@ -42,27 +42,28 @@ mixin _$UsersEvent {
   TResult when<TResult extends Object>({
     @required TResult getCurrentUser(),
     @required TResult watchCurrentUser(),
-    @required TResult updateCurrentUserProfilePic(bool removeInstead),
+    @required
+        TResult userReceived(
+            Either<UserFailure, OOGLOOUser> userFailureOrSuccess),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult getCurrentUser(),
     TResult watchCurrentUser(),
-    TResult updateCurrentUserProfilePic(bool removeInstead),
+    TResult userReceived(Either<UserFailure, OOGLOOUser> userFailureOrSuccess),
     @required TResult orElse(),
   });
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult getCurrentUser(GetCurrentUser value),
     @required TResult watchCurrentUser(WatchCurrentUser value),
-    @required
-        TResult updateCurrentUserProfilePic(UpdateCurrentUserProfilePic value),
+    @required TResult userReceived(UserRecieved value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult getCurrentUser(GetCurrentUser value),
     TResult watchCurrentUser(WatchCurrentUser value),
-    TResult updateCurrentUserProfilePic(UpdateCurrentUserProfilePic value),
+    TResult userReceived(UserRecieved value),
     @required TResult orElse(),
   });
 }
@@ -123,11 +124,13 @@ class _$GetCurrentUser implements GetCurrentUser {
   TResult when<TResult extends Object>({
     @required TResult getCurrentUser(),
     @required TResult watchCurrentUser(),
-    @required TResult updateCurrentUserProfilePic(bool removeInstead),
+    @required
+        TResult userReceived(
+            Either<UserFailure, OOGLOOUser> userFailureOrSuccess),
   }) {
     assert(getCurrentUser != null);
     assert(watchCurrentUser != null);
-    assert(updateCurrentUserProfilePic != null);
+    assert(userReceived != null);
     return getCurrentUser();
   }
 
@@ -136,7 +139,7 @@ class _$GetCurrentUser implements GetCurrentUser {
   TResult maybeWhen<TResult extends Object>({
     TResult getCurrentUser(),
     TResult watchCurrentUser(),
-    TResult updateCurrentUserProfilePic(bool removeInstead),
+    TResult userReceived(Either<UserFailure, OOGLOOUser> userFailureOrSuccess),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -151,12 +154,11 @@ class _$GetCurrentUser implements GetCurrentUser {
   TResult map<TResult extends Object>({
     @required TResult getCurrentUser(GetCurrentUser value),
     @required TResult watchCurrentUser(WatchCurrentUser value),
-    @required
-        TResult updateCurrentUserProfilePic(UpdateCurrentUserProfilePic value),
+    @required TResult userReceived(UserRecieved value),
   }) {
     assert(getCurrentUser != null);
     assert(watchCurrentUser != null);
-    assert(updateCurrentUserProfilePic != null);
+    assert(userReceived != null);
     return getCurrentUser(this);
   }
 
@@ -165,7 +167,7 @@ class _$GetCurrentUser implements GetCurrentUser {
   TResult maybeMap<TResult extends Object>({
     TResult getCurrentUser(GetCurrentUser value),
     TResult watchCurrentUser(WatchCurrentUser value),
-    TResult updateCurrentUserProfilePic(UpdateCurrentUserProfilePic value),
+    TResult userReceived(UserRecieved value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -221,11 +223,13 @@ class _$WatchCurrentUser implements WatchCurrentUser {
   TResult when<TResult extends Object>({
     @required TResult getCurrentUser(),
     @required TResult watchCurrentUser(),
-    @required TResult updateCurrentUserProfilePic(bool removeInstead),
+    @required
+        TResult userReceived(
+            Either<UserFailure, OOGLOOUser> userFailureOrSuccess),
   }) {
     assert(getCurrentUser != null);
     assert(watchCurrentUser != null);
-    assert(updateCurrentUserProfilePic != null);
+    assert(userReceived != null);
     return watchCurrentUser();
   }
 
@@ -234,7 +238,7 @@ class _$WatchCurrentUser implements WatchCurrentUser {
   TResult maybeWhen<TResult extends Object>({
     TResult getCurrentUser(),
     TResult watchCurrentUser(),
-    TResult updateCurrentUserProfilePic(bool removeInstead),
+    TResult userReceived(Either<UserFailure, OOGLOOUser> userFailureOrSuccess),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -249,12 +253,11 @@ class _$WatchCurrentUser implements WatchCurrentUser {
   TResult map<TResult extends Object>({
     @required TResult getCurrentUser(GetCurrentUser value),
     @required TResult watchCurrentUser(WatchCurrentUser value),
-    @required
-        TResult updateCurrentUserProfilePic(UpdateCurrentUserProfilePic value),
+    @required TResult userReceived(UserRecieved value),
   }) {
     assert(getCurrentUser != null);
     assert(watchCurrentUser != null);
-    assert(updateCurrentUserProfilePic != null);
+    assert(userReceived != null);
     return watchCurrentUser(this);
   }
 
@@ -263,7 +266,7 @@ class _$WatchCurrentUser implements WatchCurrentUser {
   TResult maybeMap<TResult extends Object>({
     TResult getCurrentUser(GetCurrentUser value),
     TResult watchCurrentUser(WatchCurrentUser value),
-    TResult updateCurrentUserProfilePic(UpdateCurrentUserProfilePic value),
+    TResult userReceived(UserRecieved value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -279,80 +282,80 @@ abstract class WatchCurrentUser implements UsersEvent {
 }
 
 /// @nodoc
-abstract class $UpdateCurrentUserProfilePicCopyWith<$Res> {
-  factory $UpdateCurrentUserProfilePicCopyWith(
-          UpdateCurrentUserProfilePic value,
-          $Res Function(UpdateCurrentUserProfilePic) then) =
-      _$UpdateCurrentUserProfilePicCopyWithImpl<$Res>;
-  $Res call({bool removeInstead});
+abstract class $UserRecievedCopyWith<$Res> {
+  factory $UserRecievedCopyWith(
+          UserRecieved value, $Res Function(UserRecieved) then) =
+      _$UserRecievedCopyWithImpl<$Res>;
+  $Res call({Either<UserFailure, OOGLOOUser> userFailureOrSuccess});
 }
 
 /// @nodoc
-class _$UpdateCurrentUserProfilePicCopyWithImpl<$Res>
-    extends _$UsersEventCopyWithImpl<$Res>
-    implements $UpdateCurrentUserProfilePicCopyWith<$Res> {
-  _$UpdateCurrentUserProfilePicCopyWithImpl(UpdateCurrentUserProfilePic _value,
-      $Res Function(UpdateCurrentUserProfilePic) _then)
-      : super(_value, (v) => _then(v as UpdateCurrentUserProfilePic));
+class _$UserRecievedCopyWithImpl<$Res> extends _$UsersEventCopyWithImpl<$Res>
+    implements $UserRecievedCopyWith<$Res> {
+  _$UserRecievedCopyWithImpl(
+      UserRecieved _value, $Res Function(UserRecieved) _then)
+      : super(_value, (v) => _then(v as UserRecieved));
 
   @override
-  UpdateCurrentUserProfilePic get _value =>
-      super._value as UpdateCurrentUserProfilePic;
+  UserRecieved get _value => super._value as UserRecieved;
 
   @override
   $Res call({
-    Object removeInstead = freezed,
+    Object userFailureOrSuccess = freezed,
   }) {
-    return _then(UpdateCurrentUserProfilePic(
-      removeInstead: removeInstead == freezed
-          ? _value.removeInstead
-          : removeInstead as bool,
+    return _then(UserRecieved(
+      userFailureOrSuccess == freezed
+          ? _value.userFailureOrSuccess
+          : userFailureOrSuccess as Either<UserFailure, OOGLOOUser>,
     ));
   }
 }
 
 /// @nodoc
-class _$UpdateCurrentUserProfilePic implements UpdateCurrentUserProfilePic {
-  const _$UpdateCurrentUserProfilePic({@required this.removeInstead})
-      : assert(removeInstead != null);
+class _$UserRecieved implements UserRecieved {
+  const _$UserRecieved(this.userFailureOrSuccess)
+      : assert(userFailureOrSuccess != null);
 
   @override
-  final bool removeInstead;
+  final Either<UserFailure, OOGLOOUser> userFailureOrSuccess;
 
   @override
   String toString() {
-    return 'UsersEvent.updateCurrentUserProfilePic(removeInstead: $removeInstead)';
+    return 'UsersEvent.userReceived(userFailureOrSuccess: $userFailureOrSuccess)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is UpdateCurrentUserProfilePic &&
-            (identical(other.removeInstead, removeInstead) ||
+        (other is UserRecieved &&
+            (identical(other.userFailureOrSuccess, userFailureOrSuccess) ||
                 const DeepCollectionEquality()
-                    .equals(other.removeInstead, removeInstead)));
+                    .equals(other.userFailureOrSuccess, userFailureOrSuccess)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(removeInstead);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(userFailureOrSuccess);
 
+  @JsonKey(ignore: true)
   @override
-  $UpdateCurrentUserProfilePicCopyWith<UpdateCurrentUserProfilePic>
-      get copyWith => _$UpdateCurrentUserProfilePicCopyWithImpl<
-          UpdateCurrentUserProfilePic>(this, _$identity);
+  $UserRecievedCopyWith<UserRecieved> get copyWith =>
+      _$UserRecievedCopyWithImpl<UserRecieved>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required TResult getCurrentUser(),
     @required TResult watchCurrentUser(),
-    @required TResult updateCurrentUserProfilePic(bool removeInstead),
+    @required
+        TResult userReceived(
+            Either<UserFailure, OOGLOOUser> userFailureOrSuccess),
   }) {
     assert(getCurrentUser != null);
     assert(watchCurrentUser != null);
-    assert(updateCurrentUserProfilePic != null);
-    return updateCurrentUserProfilePic(removeInstead);
+    assert(userReceived != null);
+    return userReceived(userFailureOrSuccess);
   }
 
   @override
@@ -360,12 +363,12 @@ class _$UpdateCurrentUserProfilePic implements UpdateCurrentUserProfilePic {
   TResult maybeWhen<TResult extends Object>({
     TResult getCurrentUser(),
     TResult watchCurrentUser(),
-    TResult updateCurrentUserProfilePic(bool removeInstead),
+    TResult userReceived(Either<UserFailure, OOGLOOUser> userFailureOrSuccess),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
-    if (updateCurrentUserProfilePic != null) {
-      return updateCurrentUserProfilePic(removeInstead);
+    if (userReceived != null) {
+      return userReceived(userFailureOrSuccess);
     }
     return orElse();
   }
@@ -375,13 +378,12 @@ class _$UpdateCurrentUserProfilePic implements UpdateCurrentUserProfilePic {
   TResult map<TResult extends Object>({
     @required TResult getCurrentUser(GetCurrentUser value),
     @required TResult watchCurrentUser(WatchCurrentUser value),
-    @required
-        TResult updateCurrentUserProfilePic(UpdateCurrentUserProfilePic value),
+    @required TResult userReceived(UserRecieved value),
   }) {
     assert(getCurrentUser != null);
     assert(watchCurrentUser != null);
-    assert(updateCurrentUserProfilePic != null);
-    return updateCurrentUserProfilePic(this);
+    assert(userReceived != null);
+    return userReceived(this);
   }
 
   @override
@@ -389,24 +391,24 @@ class _$UpdateCurrentUserProfilePic implements UpdateCurrentUserProfilePic {
   TResult maybeMap<TResult extends Object>({
     TResult getCurrentUser(GetCurrentUser value),
     TResult watchCurrentUser(WatchCurrentUser value),
-    TResult updateCurrentUserProfilePic(UpdateCurrentUserProfilePic value),
+    TResult userReceived(UserRecieved value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
-    if (updateCurrentUserProfilePic != null) {
-      return updateCurrentUserProfilePic(this);
+    if (userReceived != null) {
+      return userReceived(this);
     }
     return orElse();
   }
 }
 
-abstract class UpdateCurrentUserProfilePic implements UsersEvent {
-  const factory UpdateCurrentUserProfilePic({@required bool removeInstead}) =
-      _$UpdateCurrentUserProfilePic;
+abstract class UserRecieved implements UsersEvent {
+  const factory UserRecieved(
+      Either<UserFailure, OOGLOOUser> userFailureOrSuccess) = _$UserRecieved;
 
-  bool get removeInstead;
-  $UpdateCurrentUserProfilePicCopyWith<UpdateCurrentUserProfilePic>
-      get copyWith;
+  Either<UserFailure, OOGLOOUser> get userFailureOrSuccess;
+  @JsonKey(ignore: true)
+  $UserRecievedCopyWith<UserRecieved> get copyWith;
 }
 
 /// @nodoc
@@ -429,6 +431,7 @@ const $UsersState = _$UsersStateTearOff();
 mixin _$UsersState {
   OOGLOOUser get user;
 
+  @JsonKey(ignore: true)
   $UsersStateCopyWith<UsersState> get copyWith;
 }
 
@@ -526,6 +529,7 @@ class _$_UsersState implements _UsersState {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(user);
 
+  @JsonKey(ignore: true)
   @override
   _$UsersStateCopyWith<_UsersState> get copyWith =>
       __$UsersStateCopyWithImpl<_UsersState>(this, _$identity);
@@ -537,5 +541,6 @@ abstract class _UsersState implements UsersState {
   @override
   OOGLOOUser get user;
   @override
+  @JsonKey(ignore: true)
   _$UsersStateCopyWith<_UsersState> get copyWith;
 }

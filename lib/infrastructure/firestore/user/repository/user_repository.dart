@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ecommerce_app/domain/entities/user.dart';
@@ -5,14 +7,16 @@ import 'package:ecommerce_app/domain/user/interface/i_user_repository.dart';
 import 'package:ecommerce_app/domain/user/value_objects/user_failures.dart';
 import 'package:ecommerce_app/infrastructure/firestore/user/user_dto.dart';
 import 'package:ecommerce_app/infrastructure/core/firestore_helpers.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: IUserRepository)
 class UserRepository implements IUserRepository{
 
   final FirebaseFirestore _firebaseFirestore;
+  final FirebaseStorage _firebaseStorage;
 
-  UserRepository(this._firebaseFirestore);
+  UserRepository(this._firebaseFirestore, this._firebaseStorage);
 
   @override
   Future<Either<UserFailure, Unit>> insertNewUser(OOGLOOUser user) async{
@@ -52,6 +56,7 @@ class UserRepository implements IUserRepository{
       }
     }
   }
+  @override
   Stream<Either<UserFailure, OOGLOOUser>> watchUserWithID(String uID)async*{
     final userDataCollection = _firebaseFirestore.userDocument(uID).userDataCollection;
     yield* userDataCollection.snapshots().map((snapshot) => right<UserFailure,OOGLOOUser>(
@@ -104,6 +109,37 @@ class UserRepository implements IUserRepository{
         return left(const UserFailure.unexpected());
       }
     }
+  }
+
+  @override
+  Future<Either<UserFailure, String>> updateUserImage(String uID,File image) async{
+    final userDataCollection =
+        _firebaseFirestore.userDocument(uID).userDataCollection;
+
+    try{
+      final Reference userFolderRef = _firebaseStorage.ref().child('user_media').child(uID).child('profile_pic');
+      if(image != null){
+        final String imageURL = await userFolderRef.putFile(image).then((_image) => _image.ref.getDownloadURL());
+
+        await userDataCollection.doc(uID).update({"profilePicUrl" : imageURL});
+        return right(imageURL);
+      }
+      else{
+        await userDataCollection.doc(uID).update({"profilePicUrl" : ''});
+        return right('');
+      }
+    }
+    on FirebaseException catch (e) {
+      if (e.message.contains('PERMISSION_DENIED')) {
+        return left(const UserFailure.permissionDenied());
+      } else if (e.message.contains('NOT_FOUND')) {
+        return left(const UserFailure.updateError());
+      } else {
+        print(e.message);
+        return left(const UserFailure.unexpected());
+      }
+    }
+
   }
 
 }

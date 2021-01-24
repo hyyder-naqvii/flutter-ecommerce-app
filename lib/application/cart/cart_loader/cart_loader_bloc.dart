@@ -4,7 +4,6 @@ import 'package:bloc/bloc.dart';
 import 'package:ecommerce_app/domain/auth/interface/iauthenticate.dart';
 import 'package:ecommerce_app/domain/cart/interface/i_cart_repository.dart';
 import 'package:ecommerce_app/infrastructure/database/core/obay_database.dart';
-import 'package:ecommerce_app/injection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';

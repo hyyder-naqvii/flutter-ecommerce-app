@@ -31,9 +31,6 @@ class AuthenticationBloc
     yield* event.map(
       resetState: (e) async* {
         yield state.copyWith(
-            username: Username(''),
-            emailAddress: EmailAddress(''),
-            password: Password(''),
             showErrorMessages: false,
             updateSuccess: false,
             isValidating: false,
@@ -101,7 +98,7 @@ class AuthenticationBloc
             password: state.password,
             username: state.username,
             phoneNumber: PhoneNumber(''),
-            gender: OOGLOOUser.genders[0],
+            gender: OOGLOOUser.genders[0], profilePicUrl: '',
           );
           _iUserRepository.insertNewUser(user);
         }
@@ -158,11 +155,13 @@ class AuthenticationBloc
           ));
           yield state.copyWith(
             isValidating: false,
-            showErrorMessages: updateFailureOrSuccess.isRight(),
+            updateSuccess : true,
+            showErrorMessages:false,
           );
         } else {
           yield state.copyWith(
             isValidating: false,
+            updateSuccess : false,
             showErrorMessages: true,
           );
         }

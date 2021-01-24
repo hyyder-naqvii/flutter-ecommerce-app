@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:ecommerce_app/domain/entities/user.dart';
 import 'package:ecommerce_app/domain/user/value_objects/user_failures.dart';
@@ -12,4 +14,8 @@ abstract class IUserRepository{
 
   Future<Either<UserFailure, Unit>> deleteUser(OOGLOOUser user);
   Stream<Either<UserFailure, OOGLOOUser>> watchUserWithID(String uID);
+
+
+  Future<Either<UserFailure, String>> updateUserImage(String uID,File image);
+
 }

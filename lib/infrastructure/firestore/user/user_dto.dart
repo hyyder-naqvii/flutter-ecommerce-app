@@ -20,6 +20,7 @@ abstract class UserDTO implements _$UserDTO {
     @required String username,
     @required String phoneNo,
     @required String gender,
+    @required String profilePicUrl,
   }) = _UserDTO;
 
   factory UserDTO.fromDomain(OOGLOOUser user) {
@@ -29,7 +30,7 @@ abstract class UserDTO implements _$UserDTO {
       username: user.username.value.getOrElse(null),
       password: user.password.value.getOrElse(null),
       phoneNo: user.phoneNumber.value.getOrElse(null),
-      gender: user.gender,
+      gender: user.gender, profilePicUrl: user.profilePicUrl??'',
     );
   }
   OOGLOOUser toDomain() {
@@ -38,7 +39,7 @@ abstract class UserDTO implements _$UserDTO {
       username: Username(username),
       uID: UniqueID.fromUniqueString(uID),
       phoneNumber: PhoneNumber(phoneNo),
-      emailAddress: EmailAddress(email), gender: gender,
+      emailAddress: EmailAddress(email), gender: gender, profilePicUrl: profilePicUrl??'',
     );
   }
   factory UserDTO.fromJson(Map<String, dynamic> json) =>

@@ -41,7 +41,7 @@ class CartDisplay extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
+                  SizedBox(
                     width: Responsive.height(15, context),
                     height: Responsive.height(15, context),
                     child: state.maybeMap(
@@ -53,7 +53,7 @@ class CartDisplay extends StatelessWidget {
                                 'lib/assets/images/no-image.png',
                                 fit: BoxFit.cover,
                               ),
-                        orElse: () => Text('Image')),
+                        orElse: () => const Text('Image')),
                   ),
                    SizedBox(width: Responsive.height(2, context),),
 
@@ -107,7 +107,7 @@ class CartDisplay extends StatelessWidget {
                               width: Responsive.height(4, context),
                               height: Responsive.height(4, context),
                               child: FlatButton(
-                                padding: EdgeInsets.all(2),
+                                padding: const EdgeInsets.all(2),
                                 color: Colors.grey[300],
                                 onPressed: () => context
                                     .read<CartActorBloc>()
@@ -142,7 +142,7 @@ class CartDisplay extends StatelessWidget {
                               width: Responsive.height(4, context),
                               height: Responsive.height(4, context),
                               child: FlatButton(
-                                padding: EdgeInsets.all(2),
+                                padding: const EdgeInsets.all(2),
                                 color: Colors.grey[300],
                                 onPressed: () => actorBloc
                                     .add(CartActorEvent.increaseQuantity(cart)),

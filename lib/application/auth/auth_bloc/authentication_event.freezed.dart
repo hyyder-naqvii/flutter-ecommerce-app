@@ -347,6 +347,7 @@ class _$UsernameChanged implements UsernameChanged {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(username);
 
+  @JsonKey(ignore: true)
   @override
   $UsernameChangedCopyWith<UsernameChanged> get copyWith =>
       _$UsernameChangedCopyWithImpl<UsernameChanged>(this, _$identity);
@@ -455,6 +456,7 @@ abstract class UsernameChanged implements AuthenticationEvent {
   const factory UsernameChanged(String username) = _$UsernameChanged;
 
   String get username;
+  @JsonKey(ignore: true)
   $UsernameChangedCopyWith<UsernameChanged> get copyWith;
 }
 
@@ -511,6 +513,7 @@ class _$EmailChanged implements EmailChanged {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(email);
 
+  @JsonKey(ignore: true)
   @override
   $EmailChangedCopyWith<EmailChanged> get copyWith =>
       _$EmailChangedCopyWithImpl<EmailChanged>(this, _$identity);
@@ -619,6 +622,7 @@ abstract class EmailChanged implements AuthenticationEvent {
   const factory EmailChanged(String email) = _$EmailChanged;
 
   String get email;
+  @JsonKey(ignore: true)
   $EmailChangedCopyWith<EmailChanged> get copyWith;
 }
 
@@ -676,6 +680,7 @@ class _$PasswordChanged implements PasswordChanged {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(password);
 
+  @JsonKey(ignore: true)
   @override
   $PasswordChangedCopyWith<PasswordChanged> get copyWith =>
       _$PasswordChangedCopyWithImpl<PasswordChanged>(this, _$identity);
@@ -784,6 +789,7 @@ abstract class PasswordChanged implements AuthenticationEvent {
   const factory PasswordChanged(String password) = _$PasswordChanged;
 
   String get password;
+  @JsonKey(ignore: true)
   $PasswordChangedCopyWith<PasswordChanged> get copyWith;
 }
 
@@ -840,6 +846,7 @@ class _$GenderChanged implements GenderChanged {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(gender);
 
+  @JsonKey(ignore: true)
   @override
   $GenderChangedCopyWith<GenderChanged> get copyWith =>
       _$GenderChangedCopyWithImpl<GenderChanged>(this, _$identity);
@@ -948,6 +955,7 @@ abstract class GenderChanged implements AuthenticationEvent {
   const factory GenderChanged(String gender) = _$GenderChanged;
 
   String get gender;
+  @JsonKey(ignore: true)
   $GenderChangedCopyWith<GenderChanged> get copyWith;
 }
 
@@ -1005,6 +1013,7 @@ class _$PhoneNumberChanged implements PhoneNumberChanged {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(phoneNumber);
 
+  @JsonKey(ignore: true)
   @override
   $PhoneNumberChangedCopyWith<PhoneNumberChanged> get copyWith =>
       _$PhoneNumberChangedCopyWithImpl<PhoneNumberChanged>(this, _$identity);
@@ -1113,6 +1122,7 @@ abstract class PhoneNumberChanged implements AuthenticationEvent {
   const factory PhoneNumberChanged(String phoneNumber) = _$PhoneNumberChanged;
 
   String get phoneNumber;
+  @JsonKey(ignore: true)
   $PhoneNumberChangedCopyWith<PhoneNumberChanged> get copyWith;
 }
 
