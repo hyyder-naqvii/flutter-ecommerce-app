@@ -26,10 +26,11 @@ User Profile | Update Profile |
 <img src="https://github.com/hyyder-naqvii/flutter-ecommerce-app/blob/master/screenshots/user_profile.png" width="250" height="500">| <img src="https://github.com/hyyder-naqvii/flutter-ecommerce-app/blob/master/screenshots/profile_update.png" width="250" height="500">|
 
 User profile currently has 4 planned features
-* Change profile pic
-* Update profile information
-* View cart
-* View previous orders
+
+- [x] Change profile pic
+- [x] Update profile information
+- [ ] View cart
+- [ ] View previous orders
 
 Only first two features are implemented completely.
 User profile image is stored inside cloud storage. Rest of the user information is stored in cloud firestore
