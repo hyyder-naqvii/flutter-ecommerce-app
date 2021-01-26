@@ -17,10 +17,9 @@ class ProductTile extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 12),
       child: Ink(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
-                  color: mainColor.withOpacity(0.5),
+                  color: iconColorLight.withOpacity(0.5),
                   offset: const Offset(0, 1),
                   blurRadius: 10),
             ],

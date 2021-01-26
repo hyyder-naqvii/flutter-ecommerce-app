@@ -31,9 +31,16 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
   Stream<ProductFormState> mapEventToState(ProductFormEvent event,) async* {
     yield* event.map(
         initializeProduct: (e) async* {
-          yield e.product.fold(() => state,
-                  (product) =>
-                  state.copyWith(product: product, isEditing: true,saved : false));
+
+          if(e.product.isSome()){
+            Uint8List imageData =  await _productRepository.getImageData(e.product.getOrElse(null).productImageURL,e.product.getOrElse(null).uID.value.getOrElse(null));
+            yield state.copyWith(product: e.product.getOrElse(null), isEditing: true, saved: false,image : imageData);
+          }
+          else{
+            yield state;
+          }
+
+
         },
         productNameChanged: (e) async* {
           yield state.copyWith(
@@ -43,7 +50,6 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
 
             productStateOption: none(),
           );
-
         },
         productDescriptionChanged: (e) async* {
           yield state.copyWith(
@@ -53,7 +59,6 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
 
             productStateOption: none(),
           );
-
         },
         productPriceChanged: (e) async* {
           yield state.copyWith(
@@ -63,69 +68,66 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
 
             productStateOption: none(),
           );
-
         },
         productImageChanged: (e) async* {
-          if(!e.removeInstead){
+          if (!e.removeInstead) {
             final File _image = await ImagePickerUtility.pickImageFromGallery();
             final Uint8List _imageBytes = await _image.readAsBytes();
-            yield  state.copyWith(
-             image : _imageBytes,
+            yield state.copyWith(
+              image: _imageBytes,
               productStateOption: none(),);
-           }
+          }
 
-          else{
-            yield  state.copyWith(
-              image : null,
+          else {
+            yield state.copyWith(
+              image: null,
               productStateOption: none(),);
           }
         },
         addProduct: (e) async* {
           yield state.copyWith(
-            isSaving : true,
-              productStateOption: none(),
+            isSaving: true,
+            productStateOption: none(),
           );
 
-          if(state.product.isValid){
+          if (state.product.isValid) {
+            final failureOrSuccess = state.isEditing ?
+            await _productRepository.updateProduct(state.product, state.image) :
+            await _productRepository.insertNewProduct(
+                state.product, state.image);
 
-            final failureOrSuccess =  state.isEditing ?
-               await _productRepository.updateProduct(state.product,state.image) :
-               await  _productRepository.insertNewProduct(state.product,state.image);
-
-            if(failureOrSuccess.isRight()){
+            if (failureOrSuccess.isRight()) {
               print("Success Saving");
               yield state.copyWith(
-                saved : true,
+                saved: true,
               );
             }
+
             /// We reset the state here.
             yield state.copyWith(
-              isSaving : false,
-              showErrorMessages : true,
+              isSaving: false,
+              showErrorMessages: true,
               product: state.product.copyWith(
-                productImageURL : ' ',
+                productImageURL: ' ',
               ),
-              productStateOption : optionOf(failureOrSuccess),
+              productStateOption: optionOf(failureOrSuccess),
             );
-
           }
-          else{
+          else {
             yield state.copyWith(
-              isSaving : false,
-              showErrorMessages : true,
-              productStateOption : none(),
+              isSaving: false,
+              showErrorMessages: true,
+              productStateOption: none(),
             );
           }
+        },
+        productCategoryChanged: (e) async* {
+          yield state.copyWith(
+            product: state.product.copyWith(
+              category: e.productCategory,
+            ),
 
-
-        }, productCategoryChanged: (e) async*{
-        yield state.copyWith(
-        product: state.product.copyWith(
-          category : e.productCategory,
-        ),
-
-        productStateOption: none(),);
-
-    });
+            productStateOption: none(),);
+        });
   }
 }

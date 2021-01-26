@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:ecommerce_app/application/products/product_form/product_form_bloc.dart';
-import 'package:ecommerce_app/application/products/product_image_loader/product_image_loader_bloc.dart';
 import 'package:ecommerce_app/config/configuration.dart';
 import 'package:ecommerce_app/custom/gradient_button.dart';
 import 'package:ecommerce_app/domain/entities/fs_product.dart';
@@ -42,10 +41,10 @@ class AddProducts extends StatelessWidget {
             create: (context) => getIt<ProductFormBloc>()
               ..add(ProductFormEvent.initializeProduct(
                   product != null ? Some(product) : const None()))),
-        BlocProvider<ProductImageLoaderBloc>(
-            create: (context) => getIt<ProductImageLoaderBloc>()
-              ..add(ProductImageLoaderEvent.getProductImage(
-                  product != null ? product.uID.value.getOrElse(null) : ''))),
+        // BlocProvider<ProductImageLoaderBloc>(
+        //     create: (context) => getIt<ProductImageLoaderBloc>()
+        //       ..add(ProductImageLoaderEvent.getProductImage(
+        //           product != null ? product.uID.value.getOrElse(null) : ''))),
       ],
       child: Scaffold(
         appBar: buildAppBar(context),
@@ -71,13 +70,7 @@ class AddProducts extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        BlocBuilder<ProductImageLoaderBloc,
-                            ProductImageLoaderState>(
-                          builder: (context, state) {
-                            return buildProductImageSection(
-                                context, state, product);
-                          },
-                        ),
+                        buildProductImageSection(context, product),
                         SizedBox(
                           height: Responsive.height(1.5, context),
                         ),
@@ -275,8 +268,7 @@ class ProductNameField extends StatelessWidget {
 //       ProductFormEvent.productImageChanged(image ?? Uint8List.fromList([])));
 // }
 
-Widget buildProductImageSection(BuildContext context,
-    ProductImageLoaderState loaderState, FSProduct product) {
+Widget buildProductImageSection(BuildContext context, FSProduct product) {
   return BlocBuilder<ProductFormBloc, ProductFormState>(
     builder: (context, state) {
       return SizedBox(
@@ -301,30 +293,10 @@ Widget buildProductImageSection(BuildContext context,
                 buttonColor: Colors.white,
                 borderColor: iconColorLight,
               ),
-              if (state.product.productImageURL.isNotEmpty)
-                loaderState.map(
-                    initial: (_) => const CircularGradientAvatarNetwork(
-                          image: null,
-                          defaultImagePath: 'lib/assets/images/no-image.png',
-                        ),
-                    loadingImage: (_) => const CircularGradientAvatarLoading(),
-                    imageLoadSuccess: (productImageUrl) =>
-                        CircularGradientAvatarNetwork(
-                          image: productImageUrl.imageURL.isNotEmpty
-                              ? NetworkImage(productImageUrl.imageURL)
-                              : null,
-                          defaultImagePath: 'lib/assets/images/no-image.png',
-                        ),
-                    imageLoadFailure: (_) =>
-                        const CircularGradientAvatarNetwork(
-                          image: null,
-                          defaultImagePath: 'lib/assets/images/no-image.png',
-                        )),
-              if (state.product.productImageURL.isEmpty)
-                CircularGradientAvatarMemory(
-                  image: state.image.isNotEmpty? MemoryImage(state.image) : null,
-                  defaultImagePath: 'lib/assets/images/no-image.png',
-                ),
+              CircularGradientAvatarMemory(
+                image: state.image.isNotEmpty ? MemoryImage(state.image) : null,
+                defaultImagePath: 'lib/assets/images/no-image.png',
+              ),
               CircularIconButtonWithBorder(
                 borderWidth: 2,
                 size: Responsive.width(10, context),

@@ -62,11 +62,18 @@ class ProductRepository implements IProductRepository {
     try {
       final productCollection =
           _firebaseFirestore.adminDocument().productCollection;
-      final productImageURLOption = await updateProductImage(product.uID.value.getOrElse(null),image);
-      final productDTO = FSProductDTO.fromDomain(product.copyWith(
-        productImageURL : productImageURLOption.fold((_) => '', (imageURL) => imageURL)
-      ));
-      await productCollection.doc(productDTO.id).set(productDTO.toJson());
+      if(image != null){
+        final productImageURLOption = await updateProductImage(product.uID.value.getOrElse(null),image);
+        final productDTO = FSProductDTO.fromDomain(product.copyWith(
+            productImageURL : productImageURLOption.fold((_) => '', (imageURL) => imageURL)
+        ));
+        await productCollection.doc(productDTO.id).set(productDTO.toJson());
+      }
+      else{
+        final productDTO = FSProductDTO.fromDomain(product);
+        await productCollection.doc(productDTO.id).set(productDTO.toJson());
+      }
+
       print("New Product With Name : ${product.productName.value.getOrElse(null)} Added To FIrestore");
       return right(unit);
     } on FirebaseException catch (e) {
@@ -85,11 +92,19 @@ class ProductRepository implements IProductRepository {
     try {
       final productCollection =
           _firebaseFirestore.adminDocument().productCollection;
-      final productImageURLOption = await updateProductImage(product.uID.value.getOrElse(null),image);
-      final productDTO = FSProductDTO.fromDomain(product.copyWith(
-          productImageURL : productImageURLOption.fold((_) => '', (imageURL) => imageURL)
-      ));
-      await productCollection.doc(product.uID.value.getOrElse(null)).update(productDTO.toJson());
+      if(image != null){
+        final productImageURLOption = await updateProductImage(product.uID.value.getOrElse(null),image);
+        final productDTO = FSProductDTO.fromDomain(product.copyWith(
+            productImageURL : productImageURLOption.fold((_) => '', (imageURL) => imageURL)
+        ));
+        await productCollection.doc(product.uID.value.getOrElse(null)).update(productDTO.toJson());
+      }
+     else{
+        final productDTO = FSProductDTO.fromDomain(product);
+        await productCollection.doc(product.uID.value.getOrElse(null)).update(productDTO.toJson());
+      }
+
+
 
       return right(unit);
     } on FirebaseException catch (e) {
@@ -195,5 +210,12 @@ class ProductRepository implements IProductRepository {
         return left(const ProductFailure.unexpected());
       }
     }
+  }
+
+  @override
+  Future<Uint8List> getImageData(String imageURL,String productID)async {
+    final Reference productImageFolderRef = _firebaseStorage.ref().child('admin').child('products').child(productID).child('product_media').child('product_display_image');
+    final Uint8List imageData = await productImageFolderRef.getData();
+    return imageData;
   }
 }

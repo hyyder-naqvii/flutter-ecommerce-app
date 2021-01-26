@@ -24,4 +24,6 @@ abstract class IProductRepository {
 
   Future<Either<ProductFailure, String>> updateProductImage(String uID,Uint8List image);
 
+  Future<Uint8List> getImageData(String imageURL,String productID);
+
 }

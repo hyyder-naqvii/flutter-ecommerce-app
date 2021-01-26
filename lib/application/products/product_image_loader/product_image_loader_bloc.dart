@@ -24,6 +24,7 @@ class ProductImageLoaderBloc extends Bloc<ProductImageLoaderEvent, ProductImageL
     ProductImageLoaderEvent event,
   ) async* {
     yield* event.map( getProductImage: (e) async* {
+      print("Load Called with ID ${e.productID}");
       yield const ProductImageLoaderState.loadingImage();
       final productLoadSuccessOrFailure = await _iProductRepository.getWithProductID(
           e.productID);
