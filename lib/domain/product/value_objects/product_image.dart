@@ -7,11 +7,11 @@ import 'package:ecommerce_app/domain/core/valueobject.dart';
 
 class ProductImage extends ValueObject{
   @override
-  final Either<ValueFailure<Uint8List>, Uint8List> value;
+  final Either<ValueFailure<String>, String> value;
 
 
 
-  factory ProductImage(Uint8List input) {
+  factory ProductImage(String input) {
     return ProductImage._(
      right(input),
     );

@@ -32,7 +32,7 @@ class CheckOutItemDisplay extends StatelessWidget {
                     width : Responsive.width(22,context),
                     height : Responsive.width(22,context),
                     child: p.products.isNotEmpty ?
-                    Image.memory( p.products[0].productImage):
+                    Image.network(p.products[0].productImageURL):
                     Image.asset('lib/assets/images/no-image.png'),
                   ),
                   Column(

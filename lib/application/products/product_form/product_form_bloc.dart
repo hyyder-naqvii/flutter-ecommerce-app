@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:bloc/bloc.dart';
@@ -9,6 +10,7 @@ import 'package:ecommerce_app/domain/product/value_objects/product_description.d
 import 'package:ecommerce_app/domain/product/value_objects/product_failure.dart';
 import 'package:ecommerce_app/domain/product/value_objects/product_name.dart';
 import 'package:ecommerce_app/domain/product/value_objects/product_price.dart';
+import 'package:ecommerce_app/presentation/components/image_picker.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
@@ -29,7 +31,7 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
   Stream<ProductFormState> mapEventToState(ProductFormEvent event,) async* {
     yield* event.map(
         initializeProduct: (e) async* {
-          yield e.product.fold(() => state.copyWith(isEditing : false, saved : false),
+          yield e.product.fold(() => state,
                   (product) =>
                   state.copyWith(product: product, isEditing: true,saved : false));
         },
@@ -64,13 +66,19 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
 
         },
         productImageChanged: (e) async* {
+          if(!e.removeInstead){
+            final File _image = await ImagePickerUtility.pickImageFromGallery();
+            final Uint8List _imageBytes = await _image.readAsBytes();
+            yield  state.copyWith(
+             image : _imageBytes,
+              productStateOption: none(),);
+           }
 
-          yield state.copyWith(
-            product: state.product.copyWith(
-              productImage : e.productImage,
-            ),
-
-            productStateOption: none(),);
+          else{
+            yield  state.copyWith(
+              image : null,
+              productStateOption: none(),);
+          }
         },
         addProduct: (e) async* {
           yield state.copyWith(
@@ -81,8 +89,8 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
           if(state.product.isValid){
 
             final failureOrSuccess =  state.isEditing ?
-               await _productRepository.updateProduct(state.product) :
-               await  _productRepository.insertNewProduct(state.product);
+               await _productRepository.updateProduct(state.product,state.image) :
+               await  _productRepository.insertNewProduct(state.product,state.image);
 
             if(failureOrSuccess.isRight()){
               print("Success Saving");
@@ -90,12 +98,12 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
                 saved : true,
               );
             }
-
+            /// We reset the state here.
             yield state.copyWith(
               isSaving : false,
               showErrorMessages : true,
               product: state.product.copyWith(
-                productImage : Uint8List.fromList([]),
+                productImageURL : ' ',
               ),
               productStateOption : optionOf(failureOrSuccess),
             );

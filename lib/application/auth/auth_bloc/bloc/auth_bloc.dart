@@ -29,6 +29,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final OOGLOOUser user = authenticate.getSignedInUser();
         if(user != null){
           if(AdminCheck.isAdmin(user)){
+            print("is Admin");
             yield state.copyWith(isAuthenticated : true, isAdmin : true);
           }
           else{

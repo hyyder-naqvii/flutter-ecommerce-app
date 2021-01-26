@@ -189,9 +189,9 @@ class ProductDetails extends StatelessWidget {
       ),
       width: double.infinity,
       height: Responsive.height(30, context),
-      child: product.getOrElse(null).productImage.isNotEmpty
-          ? Image.memory(
-              product.getOrElse(null).productImage,
+      child: product.getOrElse(null).productImageURL.isNotEmpty
+          ? Image.network(
+             product.getOrElse(null).productImageURL,
             )
           : Image.asset('lib/assets/images/no-image.png'),
     );

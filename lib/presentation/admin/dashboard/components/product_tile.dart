@@ -14,7 +14,7 @@ class ProductTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 12),
+      margin: const EdgeInsets.only(bottom: 12),
       child: Ink(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
@@ -36,6 +36,7 @@ class ProductTile extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.baseline,
+              textBaseline: TextBaseline.alphabetic,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(
@@ -43,7 +44,7 @@ class ProductTile extends StatelessWidget {
                   height: Responsive.width(25, context),
                   child: Card(
                     elevation: 0,
-                    child: product.productImage.isNotEmpty?Image.memory(product.productImage, fit: BoxFit.fill,):
+                    child: product.productImageURL.isNotEmpty?Image.network(product.productImageURL, fit: BoxFit.fill,):
                     Image.asset('lib/assets/images/no-image.png',
                     fit: BoxFit.fill,),
                   ),

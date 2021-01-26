@@ -151,18 +151,18 @@ class UserProfile extends StatelessWidget {
             borderColor: iconColorLight,
           ),
           state.map(
-              initial: (_) => const CircularGradientAvatar(
+              initial: (_) => const CircularGradientAvatarNetwork(
                 image: null,
                 defaultImagePath: 'lib/assets/images/default-user.png',
               ),
               loadingImage: (_) => const CircularGradientAvatarLoading(),
-              imageLoadSuccess: (imageURL) => CircularGradientAvatar(
+              imageLoadSuccess: (imageURL) => CircularGradientAvatarNetwork(
                     image: imageURL.imageURL.isNotEmpty
                         ? NetworkImage(imageURL.imageURL)
                         : null,
                     defaultImagePath: 'lib/assets/images/default-user.png',
                   ),
-              imageLoadFailure: (_) => const CircularGradientAvatar(
+              imageLoadFailure: (_) => const CircularGradientAvatarNetwork(
                     image: null,
                     defaultImagePath: 'lib/assets/images/default-user.png',
                   )),

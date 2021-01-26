@@ -22,14 +22,14 @@ class _$FSProductDTOTearOff {
       @required String productName,
       @required String productDescription,
       @required String productPrice,
-      @required List<int> productImage,
+      @required String productImageURL,
       @required String productCategory}) {
     return _FSProductDTO(
       id: id,
       productName: productName,
       productDescription: productDescription,
       productPrice: productPrice,
-      productImage: productImage,
+      productImageURL: productImageURL,
       productCategory: productCategory,
     );
   }
@@ -51,7 +51,7 @@ mixin _$FSProductDTO {
   String get productName;
   String get productDescription;
   String get productPrice;
-  List<int> get productImage;
+  String get productImageURL;
   String get productCategory;
 
   Map<String, dynamic> toJson();
@@ -69,7 +69,7 @@ abstract class $FSProductDTOCopyWith<$Res> {
       String productName,
       String productDescription,
       String productPrice,
-      List<int> productImage,
+      String productImageURL,
       String productCategory});
 }
 
@@ -87,7 +87,7 @@ class _$FSProductDTOCopyWithImpl<$Res> implements $FSProductDTOCopyWith<$Res> {
     Object productName = freezed,
     Object productDescription = freezed,
     Object productPrice = freezed,
-    Object productImage = freezed,
+    Object productImageURL = freezed,
     Object productCategory = freezed,
   }) {
     return _then(_value.copyWith(
@@ -100,9 +100,9 @@ class _$FSProductDTOCopyWithImpl<$Res> implements $FSProductDTOCopyWith<$Res> {
       productPrice: productPrice == freezed
           ? _value.productPrice
           : productPrice as String,
-      productImage: productImage == freezed
-          ? _value.productImage
-          : productImage as List<int>,
+      productImageURL: productImageURL == freezed
+          ? _value.productImageURL
+          : productImageURL as String,
       productCategory: productCategory == freezed
           ? _value.productCategory
           : productCategory as String,
@@ -122,7 +122,7 @@ abstract class _$FSProductDTOCopyWith<$Res>
       String productName,
       String productDescription,
       String productPrice,
-      List<int> productImage,
+      String productImageURL,
       String productCategory});
 }
 
@@ -142,7 +142,7 @@ class __$FSProductDTOCopyWithImpl<$Res> extends _$FSProductDTOCopyWithImpl<$Res>
     Object productName = freezed,
     Object productDescription = freezed,
     Object productPrice = freezed,
-    Object productImage = freezed,
+    Object productImageURL = freezed,
     Object productCategory = freezed,
   }) {
     return _then(_FSProductDTO(
@@ -155,9 +155,9 @@ class __$FSProductDTOCopyWithImpl<$Res> extends _$FSProductDTOCopyWithImpl<$Res>
       productPrice: productPrice == freezed
           ? _value.productPrice
           : productPrice as String,
-      productImage: productImage == freezed
-          ? _value.productImage
-          : productImage as List<int>,
+      productImageURL: productImageURL == freezed
+          ? _value.productImageURL
+          : productImageURL as String,
       productCategory: productCategory == freezed
           ? _value.productCategory
           : productCategory as String,
@@ -174,12 +174,12 @@ class _$_FSProductDTO extends _FSProductDTO {
       @required this.productName,
       @required this.productDescription,
       @required this.productPrice,
-      @required this.productImage,
+      @required this.productImageURL,
       @required this.productCategory})
       : assert(productName != null),
         assert(productDescription != null),
         assert(productPrice != null),
-        assert(productImage != null),
+        assert(productImageURL != null),
         assert(productCategory != null),
         super._();
 
@@ -196,13 +196,13 @@ class _$_FSProductDTO extends _FSProductDTO {
   @override
   final String productPrice;
   @override
-  final List<int> productImage;
+  final String productImageURL;
   @override
   final String productCategory;
 
   @override
   String toString() {
-    return 'FSProductDTO(id: $id, productName: $productName, productDescription: $productDescription, productPrice: $productPrice, productImage: $productImage, productCategory: $productCategory)';
+    return 'FSProductDTO(id: $id, productName: $productName, productDescription: $productDescription, productPrice: $productPrice, productImageURL: $productImageURL, productCategory: $productCategory)';
   }
 
   @override
@@ -220,9 +220,9 @@ class _$_FSProductDTO extends _FSProductDTO {
             (identical(other.productPrice, productPrice) ||
                 const DeepCollectionEquality()
                     .equals(other.productPrice, productPrice)) &&
-            (identical(other.productImage, productImage) ||
+            (identical(other.productImageURL, productImageURL) ||
                 const DeepCollectionEquality()
-                    .equals(other.productImage, productImage)) &&
+                    .equals(other.productImageURL, productImageURL)) &&
             (identical(other.productCategory, productCategory) ||
                 const DeepCollectionEquality()
                     .equals(other.productCategory, productCategory)));
@@ -235,7 +235,7 @@ class _$_FSProductDTO extends _FSProductDTO {
       const DeepCollectionEquality().hash(productName) ^
       const DeepCollectionEquality().hash(productDescription) ^
       const DeepCollectionEquality().hash(productPrice) ^
-      const DeepCollectionEquality().hash(productImage) ^
+      const DeepCollectionEquality().hash(productImageURL) ^
       const DeepCollectionEquality().hash(productCategory);
 
   @JsonKey(ignore: true)
@@ -256,7 +256,7 @@ abstract class _FSProductDTO extends FSProductDTO {
       @required String productName,
       @required String productDescription,
       @required String productPrice,
-      @required List<int> productImage,
+      @required String productImageURL,
       @required String productCategory}) = _$_FSProductDTO;
 
   factory _FSProductDTO.fromJson(Map<String, dynamic> json) =
@@ -272,7 +272,7 @@ abstract class _FSProductDTO extends FSProductDTO {
   @override
   String get productPrice;
   @override
-  List<int> get productImage;
+  String get productImageURL;
   @override
   String get productCategory;
   @override

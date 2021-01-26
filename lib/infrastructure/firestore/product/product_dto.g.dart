@@ -11,8 +11,7 @@ _$_FSProductDTO _$_$_FSProductDTOFromJson(Map<String, dynamic> json) {
     productName: json['productName'] as String,
     productDescription: json['productDescription'] as String,
     productPrice: json['productPrice'] as String,
-    productImage:
-        (json['productImage'] as List)?.map((e) => e as int)?.toList(),
+    productImageURL: json['productImageURL'] as String,
     productCategory: json['productCategory'] as String,
   );
 }
@@ -22,6 +21,6 @@ Map<String, dynamic> _$_$_FSProductDTOToJson(_$_FSProductDTO instance) =>
       'productName': instance.productName,
       'productDescription': instance.productDescription,
       'productPrice': instance.productPrice,
-      'productImage': instance.productImage,
+      'productImageURL': instance.productImageURL,
       'productCategory': instance.productCategory,
     };

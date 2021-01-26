@@ -27,6 +27,7 @@ class SkeletonProduct extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.baseline,
+        textBaseline: TextBaseline.alphabetic,
         children: [
           Shimmer.fromColors(
             highlightColor:

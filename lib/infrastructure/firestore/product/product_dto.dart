@@ -22,7 +22,7 @@ abstract class FSProductDTO implements _$FSProductDTO {
     @required String productName,
     @required String productDescription,
     @required String productPrice,
-    @required List<int> productImage,
+    @required String productImageURL,
     @required String productCategory,
 
   }
@@ -34,7 +34,7 @@ abstract class FSProductDTO implements _$FSProductDTO {
       productName: product.productName.value.getOrElse(null),
       productDescription:product.productDescription.value.getOrElse(null),
       productPrice: product.productPrice.value.getOrElse(null),
-      productImage: product.productImage.toList(),
+      productImageURL: product.productImageURL,
       productCategory: product.category,
     );
 
@@ -48,7 +48,7 @@ abstract class FSProductDTO implements _$FSProductDTO {
        productName: ProductName(productName),
        productDescription: ProductDescription(productDescription),
        productPrice: ProductPrice(productPrice),
-       productImage: Uint8List.fromList(productImage),
+       productImageURL: productImageURL,
      category: productCategory,
    );
  }
@@ -59,14 +59,3 @@ abstract class FSProductDTO implements _$FSProductDTO {
   }
 
 }
-
-// class UInt8ListConverter implements JsonConverter<Uint8List,List<int>>{
-//   const UInt8ListConverter();
-//   @override
-//   Uint8List fromJson(List<int> intList) {
-//     return Uint8List.fromList(intList);
-//   }
-//   @override
-//   List<int> toJson(Uint8List uint8list) => uint8list.toList();
-// }
-

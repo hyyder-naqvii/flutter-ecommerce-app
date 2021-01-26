@@ -46,8 +46,8 @@ class CartDisplay extends StatelessWidget {
                     height: Responsive.height(15, context),
                     child: state.maybeMap(
                         loadSuccess: (product) => product.products.isNotEmpty
-                            ? Image.memory(
-                                product.products[0].productImage,
+                            ? Image.network(
+                                product.products[0].productImageURL,
                               )
                             : Image.asset(
                                 'lib/assets/images/no-image.png',

@@ -25,6 +25,7 @@ import 'domain/user/interface/i_user_repository.dart';
 import 'infrastructure/database/tables/users/users_table.dart';
 import 'infrastructure/database/core/obay_database.dart';
 import 'application/products/product_form/product_form_bloc.dart';
+import 'application/products/product_image_loader/product_image_loader_bloc.dart';
 import 'application/products/product_loader/product_loader_bloc.dart';
 import 'infrastructure/firestore/product/repository/product_repository.dart';
 import 'application/users/user_image/user_image_bloc.dart';
@@ -52,12 +53,14 @@ GetIt $initGetIt(
       () => firebaseAuthenticateRegisterModule.googleSignIn);
   gh.lazySingleton<IAuthenticate>(
       () => FirebaseAuthenticate(get<FirebaseAuth>(), get<GoogleSignIn>()));
-  gh.lazySingleton<IProductRepository>(
-      () => ProductRepository(get<FirebaseFirestore>()));
+  gh.lazySingleton<IProductRepository>(() =>
+      ProductRepository(get<FirebaseFirestore>(), get<FirebaseStorage>()));
   gh.lazySingleton<IUserRepository>(
       () => UserRepository(get<FirebaseFirestore>(), get<FirebaseStorage>()));
   gh.lazySingleton<ObayDatabase>(() => ObayDatabase());
   gh.factory<ProductFormBloc>(() => ProductFormBloc(get<IProductRepository>()));
+  gh.factory<ProductImageLoaderBloc>(
+      () => ProductImageLoaderBloc(get<IProductRepository>()));
   gh.factory<ProductLoaderBloc>(
       () => ProductLoaderBloc(get<IProductRepository>()));
   gh.factory<UserImageBloc>(

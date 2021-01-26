@@ -1,7 +1,6 @@
-import 'dart:typed_data';
-
 import 'package:dartz/dartz.dart';
 import 'package:ecommerce_app/application/products/product_form/product_form_bloc.dart';
+import 'package:ecommerce_app/application/products/product_image_loader/product_image_loader_bloc.dart';
 import 'package:ecommerce_app/config/configuration.dart';
 import 'package:ecommerce_app/custom/gradient_button.dart';
 import 'package:ecommerce_app/domain/entities/fs_product.dart';
@@ -10,7 +9,6 @@ import 'package:ecommerce_app/domain/product/value_objects/product_name.dart';
 import 'package:ecommerce_app/hardcoded/product_categories.dart';
 import 'package:ecommerce_app/presentation/components/circular_button_with_border.dart';
 import 'package:ecommerce_app/presentation/components/gradient_circle_avatar.dart';
-import 'package:ecommerce_app/presentation/components/image_picker.dart';
 import 'package:ecommerce_app/presentation/components/screen_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,17 +36,25 @@ class AddProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ProductFormBloc>(
-      create: (context) => getIt<ProductFormBloc>()..add( ProductFormEvent.initializeProduct(product != null ? Some(product) : const None())),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ProductFormBloc>(
+            create: (context) => getIt<ProductFormBloc>()
+              ..add(ProductFormEvent.initializeProduct(
+                  product != null ? Some(product) : const None()))),
+        BlocProvider<ProductImageLoaderBloc>(
+            create: (context) => getIt<ProductImageLoaderBloc>()
+              ..add(ProductImageLoaderEvent.getProductImage(
+                  product != null ? product.uID.value.getOrElse(null) : ''))),
+      ],
       child: Scaffold(
         appBar: buildAppBar(context),
         body: BlocConsumer<ProductFormBloc, ProductFormState>(
-          listener: (context,state){
-           if(state.saved){
-             Navigator.of(context).pop();
-           }
-          },
-            builder: (context, state) {
+            listener: (context, state) {
+          if (state.saved) {
+            Navigator.of(context).pop();
+          }
+        }, builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.all(20.0),
             child: SingleChildScrollView(
@@ -65,7 +71,13 @@ class AddProducts extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        buildProductImageSection(context, state),
+                        BlocBuilder<ProductImageLoaderBloc,
+                            ProductImageLoaderState>(
+                          builder: (context, state) {
+                            return buildProductImageSection(
+                                context, state, product);
+                          },
+                        ),
                         SizedBox(
                           height: Responsive.height(1.5, context),
                         ),
@@ -93,7 +105,6 @@ class AddProducts extends StatelessWidget {
                               context
                                   .read<ProductFormBloc>()
                                   .add(const ProductFormEvent.addProduct());
-
                             })
                       ],
                     ),
@@ -256,61 +267,84 @@ class ProductNameField extends StatelessWidget {
 }
 
 // ignore: always_declare_return_types
-_pickProductImage(BuildContext context) async {
-  //Todo implement cloud storage for product image!
-  final  imageFile = await ImagePickerUtility.pickImageFromGallery();
-  final Uint8List image = imageFile.readAsBytesSync();
-  context.read<ProductFormBloc>().add(
-      ProductFormEvent.productImageChanged(image ?? Uint8List.fromList([])));
-}
+// _pickProductImage(BuildContext context) async {
+//   //Todo implement cloud storage for product image!
+//   final  imageFile = await ImagePickerUtility.pickImageFromGallery();
+//   final Uint8List image = imageFile.readAsBytesSync();
+//   context.read<ProductFormBloc>().add(
+//       ProductFormEvent.productImageChanged(image ?? Uint8List.fromList([])));
+// }
 
-SizedBox buildProductImageSection(
-    BuildContext context, ProductFormState state) {
-  return SizedBox(
-    height: Responsive.width(50, context),
-    child: Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          CircularIconButtonWithBorder(
-            borderWidth: 2,
-            size: Responsive.width(10, context),
-            icon: const Icon(
-              Icons.camera_alt,
-            ),
-            onPressedCallback: () {
-              _pickProductImage(context);
-            },
-            iconColor: iconColorLight,
-            buttonColor: Colors.white,
-            borderColor: iconColorLight,
+Widget buildProductImageSection(BuildContext context,
+    ProductImageLoaderState loaderState, FSProduct product) {
+  return BlocBuilder<ProductFormBloc, ProductFormState>(
+    builder: (context, state) {
+      return SizedBox(
+        height: Responsive.width(50, context),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              CircularIconButtonWithBorder(
+                borderWidth: 2,
+                size: Responsive.width(10, context),
+                icon: const Icon(
+                  Icons.camera_alt,
+                ),
+                onPressedCallback: () {
+                  context.read<ProductFormBloc>().add(
+                      const ProductFormEvent.productImageChanged(
+                          removeInstead: false));
+                },
+                iconColor: iconColorLight,
+                buttonColor: Colors.white,
+                borderColor: iconColorLight,
+              ),
+              if (state.product.productImageURL.isNotEmpty)
+                loaderState.map(
+                    initial: (_) => const CircularGradientAvatarNetwork(
+                          image: null,
+                          defaultImagePath: 'lib/assets/images/no-image.png',
+                        ),
+                    loadingImage: (_) => const CircularGradientAvatarLoading(),
+                    imageLoadSuccess: (productImageUrl) =>
+                        CircularGradientAvatarNetwork(
+                          image: productImageUrl.imageURL.isNotEmpty
+                              ? NetworkImage(productImageUrl.imageURL)
+                              : null,
+                          defaultImagePath: 'lib/assets/images/no-image.png',
+                        ),
+                    imageLoadFailure: (_) =>
+                        const CircularGradientAvatarNetwork(
+                          image: null,
+                          defaultImagePath: 'lib/assets/images/no-image.png',
+                        )),
+              if (state.product.productImageURL.isEmpty)
+                CircularGradientAvatarMemory(
+                  image: state.image.isNotEmpty? MemoryImage(state.image) : null,
+                  defaultImagePath: 'lib/assets/images/no-image.png',
+                ),
+              CircularIconButtonWithBorder(
+                borderWidth: 2,
+                size: Responsive.width(10, context),
+                icon: const Icon(
+                  Icons.cancel,
+                ),
+                onPressedCallback: () {
+                  context.read<ProductFormBloc>().add(
+                      const ProductFormEvent.productImageChanged(
+                          removeInstead: true));
+                },
+                iconColor: iconColorLight,
+                buttonColor: Colors.white,
+                borderColor: iconColorLight,
+              ),
+            ],
           ),
-          const CircularGradientAvatar(
-            //Todo implement product image selection
-            // image: state.product.productImage.isNotEmpty
-            //     ? MemoryImage(state.product.productImage)
-            //     : null,
-            image: null,
-            defaultImagePath: 'lib/assets/images/no-image.png',
-          ),
-          CircularIconButtonWithBorder(
-            borderWidth: 2,
-            size: Responsive.width(10, context),
-            icon: const Icon(
-              Icons.cancel,
-            ),
-            onPressedCallback: () {
-              context.read<ProductFormBloc>().add(
-                  ProductFormEvent.productImageChanged(Uint8List.fromList([])));
-            },
-            iconColor: iconColorLight,
-            buttonColor: Colors.white,
-            borderColor: iconColorLight,
-          ),
-        ],
-      ),
-    ),
+        ),
+      );
+    },
   );
 }
 

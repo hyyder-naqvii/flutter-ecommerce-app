@@ -22,7 +22,7 @@ abstract class FSProduct implements _$FSProduct {
     @required ProductName productName,
     @required ProductDescription productDescription,
     @required ProductPrice productPrice,
-    @required Uint8List productImage,
+    @required String productImageURL,
     @required String category
   }) = _FSProduct;
 
@@ -32,8 +32,7 @@ abstract class FSProduct implements _$FSProduct {
         productDescription: ProductDescription(''),
         productPrice: ProductPrice('0'),
         category: productCategories[0].categoryName,
-        productImage: Uint8List.fromList([]),
-
+        productImageURL: '',
       );
 
 

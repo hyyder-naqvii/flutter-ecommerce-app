@@ -30,10 +30,9 @@ class ProductDisplay extends StatelessWidget {
                 child: Column(
                   children: [
 
-                    if (product.productImage
-                        .isNotEmpty) Image.memory(
-                      product.productImage,
-
+                    if (product.productImageURL
+                        .isNotEmpty) Image.network(
+                      product.productImageURL,
                       width: Responsive.width(45, context),
                       height: Responsive.height(
                           22, context),

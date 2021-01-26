@@ -50,9 +50,9 @@ class _$ProductFormEventTearOff {
   }
 
 // ignore: unused_element
-  _ProductImageChanged productImageChanged(Uint8List productImage) {
+  _ProductImageChanged productImageChanged({@required bool removeInstead}) {
     return _ProductImageChanged(
-      productImage,
+      removeInstead: removeInstead,
     );
   }
 
@@ -75,7 +75,7 @@ mixin _$ProductFormEvent {
     @required TResult productCategoryChanged(String productCategory),
     @required TResult productDescriptionChanged(String productDescription),
     @required TResult productPriceChanged(String productPrice),
-    @required TResult productImageChanged(Uint8List productImage),
+    @required TResult productImageChanged(bool removeInstead),
     @required TResult addProduct(),
   });
   @optionalTypeArgs
@@ -85,7 +85,7 @@ mixin _$ProductFormEvent {
     TResult productCategoryChanged(String productCategory),
     TResult productDescriptionChanged(String productDescription),
     TResult productPriceChanged(String productPrice),
-    TResult productImageChanged(Uint8List productImage),
+    TResult productImageChanged(bool removeInstead),
     TResult addProduct(),
     @required TResult orElse(),
   });
@@ -196,7 +196,7 @@ class _$_InitializeProduct implements _InitializeProduct {
     @required TResult productCategoryChanged(String productCategory),
     @required TResult productDescriptionChanged(String productDescription),
     @required TResult productPriceChanged(String productPrice),
-    @required TResult productImageChanged(Uint8List productImage),
+    @required TResult productImageChanged(bool removeInstead),
     @required TResult addProduct(),
   }) {
     assert(initializeProduct != null);
@@ -217,7 +217,7 @@ class _$_InitializeProduct implements _InitializeProduct {
     TResult productCategoryChanged(String productCategory),
     TResult productDescriptionChanged(String productDescription),
     TResult productPriceChanged(String productPrice),
-    TResult productImageChanged(Uint8List productImage),
+    TResult productImageChanged(bool removeInstead),
     TResult addProduct(),
     @required TResult orElse(),
   }) {
@@ -346,7 +346,7 @@ class _$_ProductNameChanged implements _ProductNameChanged {
     @required TResult productCategoryChanged(String productCategory),
     @required TResult productDescriptionChanged(String productDescription),
     @required TResult productPriceChanged(String productPrice),
-    @required TResult productImageChanged(Uint8List productImage),
+    @required TResult productImageChanged(bool removeInstead),
     @required TResult addProduct(),
   }) {
     assert(initializeProduct != null);
@@ -367,7 +367,7 @@ class _$_ProductNameChanged implements _ProductNameChanged {
     TResult productCategoryChanged(String productCategory),
     TResult productDescriptionChanged(String productDescription),
     TResult productPriceChanged(String productPrice),
-    TResult productImageChanged(Uint8List productImage),
+    TResult productImageChanged(bool removeInstead),
     TResult addProduct(),
     @required TResult orElse(),
   }) {
@@ -500,7 +500,7 @@ class _$_ProductCategoryChanged implements _ProductCategoryChanged {
     @required TResult productCategoryChanged(String productCategory),
     @required TResult productDescriptionChanged(String productDescription),
     @required TResult productPriceChanged(String productPrice),
-    @required TResult productImageChanged(Uint8List productImage),
+    @required TResult productImageChanged(bool removeInstead),
     @required TResult addProduct(),
   }) {
     assert(initializeProduct != null);
@@ -521,7 +521,7 @@ class _$_ProductCategoryChanged implements _ProductCategoryChanged {
     TResult productCategoryChanged(String productCategory),
     TResult productDescriptionChanged(String productDescription),
     TResult productPriceChanged(String productPrice),
-    TResult productImageChanged(Uint8List productImage),
+    TResult productImageChanged(bool removeInstead),
     TResult addProduct(),
     @required TResult orElse(),
   }) {
@@ -657,7 +657,7 @@ class _$_ProductDescriptionChanged implements _ProductDescriptionChanged {
     @required TResult productCategoryChanged(String productCategory),
     @required TResult productDescriptionChanged(String productDescription),
     @required TResult productPriceChanged(String productPrice),
-    @required TResult productImageChanged(Uint8List productImage),
+    @required TResult productImageChanged(bool removeInstead),
     @required TResult addProduct(),
   }) {
     assert(initializeProduct != null);
@@ -678,7 +678,7 @@ class _$_ProductDescriptionChanged implements _ProductDescriptionChanged {
     TResult productCategoryChanged(String productCategory),
     TResult productDescriptionChanged(String productDescription),
     TResult productPriceChanged(String productPrice),
-    TResult productImageChanged(Uint8List productImage),
+    TResult productImageChanged(bool removeInstead),
     TResult addProduct(),
     @required TResult orElse(),
   }) {
@@ -809,7 +809,7 @@ class _$_ProductPriceChanged implements _ProductPriceChanged {
     @required TResult productCategoryChanged(String productCategory),
     @required TResult productDescriptionChanged(String productDescription),
     @required TResult productPriceChanged(String productPrice),
-    @required TResult productImageChanged(Uint8List productImage),
+    @required TResult productImageChanged(bool removeInstead),
     @required TResult addProduct(),
   }) {
     assert(initializeProduct != null);
@@ -830,7 +830,7 @@ class _$_ProductPriceChanged implements _ProductPriceChanged {
     TResult productCategoryChanged(String productCategory),
     TResult productDescriptionChanged(String productDescription),
     TResult productPriceChanged(String productPrice),
-    TResult productImageChanged(Uint8List productImage),
+    TResult productImageChanged(bool removeInstead),
     TResult addProduct(),
     @required TResult orElse(),
   }) {
@@ -897,7 +897,7 @@ abstract class _$ProductImageChangedCopyWith<$Res> {
   factory _$ProductImageChangedCopyWith(_ProductImageChanged value,
           $Res Function(_ProductImageChanged) then) =
       __$ProductImageChangedCopyWithImpl<$Res>;
-  $Res call({Uint8List productImage});
+  $Res call({bool removeInstead});
 }
 
 /// @nodoc
@@ -913,39 +913,41 @@ class __$ProductImageChangedCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object productImage = freezed,
+    Object removeInstead = freezed,
   }) {
     return _then(_ProductImageChanged(
-      productImage == freezed ? _value.productImage : productImage as Uint8List,
+      removeInstead: removeInstead == freezed
+          ? _value.removeInstead
+          : removeInstead as bool,
     ));
   }
 }
 
 /// @nodoc
 class _$_ProductImageChanged implements _ProductImageChanged {
-  const _$_ProductImageChanged(this.productImage)
-      : assert(productImage != null);
+  const _$_ProductImageChanged({@required this.removeInstead})
+      : assert(removeInstead != null);
 
   @override
-  final Uint8List productImage;
+  final bool removeInstead;
 
   @override
   String toString() {
-    return 'ProductFormEvent.productImageChanged(productImage: $productImage)';
+    return 'ProductFormEvent.productImageChanged(removeInstead: $removeInstead)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _ProductImageChanged &&
-            (identical(other.productImage, productImage) ||
+            (identical(other.removeInstead, removeInstead) ||
                 const DeepCollectionEquality()
-                    .equals(other.productImage, productImage)));
+                    .equals(other.removeInstead, removeInstead)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(productImage);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(removeInstead);
 
   @JsonKey(ignore: true)
   @override
@@ -961,7 +963,7 @@ class _$_ProductImageChanged implements _ProductImageChanged {
     @required TResult productCategoryChanged(String productCategory),
     @required TResult productDescriptionChanged(String productDescription),
     @required TResult productPriceChanged(String productPrice),
-    @required TResult productImageChanged(Uint8List productImage),
+    @required TResult productImageChanged(bool removeInstead),
     @required TResult addProduct(),
   }) {
     assert(initializeProduct != null);
@@ -971,7 +973,7 @@ class _$_ProductImageChanged implements _ProductImageChanged {
     assert(productPriceChanged != null);
     assert(productImageChanged != null);
     assert(addProduct != null);
-    return productImageChanged(productImage);
+    return productImageChanged(removeInstead);
   }
 
   @override
@@ -982,13 +984,13 @@ class _$_ProductImageChanged implements _ProductImageChanged {
     TResult productCategoryChanged(String productCategory),
     TResult productDescriptionChanged(String productDescription),
     TResult productPriceChanged(String productPrice),
-    TResult productImageChanged(Uint8List productImage),
+    TResult productImageChanged(bool removeInstead),
     TResult addProduct(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (productImageChanged != null) {
-      return productImageChanged(productImage);
+      return productImageChanged(removeInstead);
     }
     return orElse();
   }
@@ -1036,10 +1038,10 @@ class _$_ProductImageChanged implements _ProductImageChanged {
 }
 
 abstract class _ProductImageChanged implements ProductFormEvent {
-  const factory _ProductImageChanged(Uint8List productImage) =
+  const factory _ProductImageChanged({@required bool removeInstead}) =
       _$_ProductImageChanged;
 
-  Uint8List get productImage;
+  bool get removeInstead;
   @JsonKey(ignore: true)
   _$ProductImageChangedCopyWith<_ProductImageChanged> get copyWith;
 }
@@ -1088,7 +1090,7 @@ class _$_AddProduct implements _AddProduct {
     @required TResult productCategoryChanged(String productCategory),
     @required TResult productDescriptionChanged(String productDescription),
     @required TResult productPriceChanged(String productPrice),
-    @required TResult productImageChanged(Uint8List productImage),
+    @required TResult productImageChanged(bool removeInstead),
     @required TResult addProduct(),
   }) {
     assert(initializeProduct != null);
@@ -1109,7 +1111,7 @@ class _$_AddProduct implements _AddProduct {
     TResult productCategoryChanged(String productCategory),
     TResult productDescriptionChanged(String productDescription),
     TResult productPriceChanged(String productPrice),
-    TResult productImageChanged(Uint8List productImage),
+    TResult productImageChanged(bool removeInstead),
     TResult addProduct(),
     @required TResult orElse(),
   }) {
@@ -1173,6 +1175,7 @@ class _$ProductFormStateTearOff {
 // ignore: unused_element
   _ProductFormState call(
       {@required FSProduct product,
+      @required Uint8List image,
       @required bool showErrorMessages,
       @required bool isSaving,
       @required bool isEditing,
@@ -1180,6 +1183,7 @@ class _$ProductFormStateTearOff {
       @required Option<Either<ProductFailure, Unit>> productStateOption}) {
     return _ProductFormState(
       product: product,
+      image: image,
       showErrorMessages: showErrorMessages,
       isSaving: isSaving,
       isEditing: isEditing,
@@ -1196,6 +1200,7 @@ const $ProductFormState = _$ProductFormStateTearOff();
 /// @nodoc
 mixin _$ProductFormState {
   FSProduct get product;
+  Uint8List get image;
   bool get showErrorMessages;
   bool get isSaving;
   bool get isEditing;
@@ -1213,6 +1218,7 @@ abstract class $ProductFormStateCopyWith<$Res> {
       _$ProductFormStateCopyWithImpl<$Res>;
   $Res call(
       {FSProduct product,
+      Uint8List image,
       bool showErrorMessages,
       bool isSaving,
       bool isEditing,
@@ -1234,6 +1240,7 @@ class _$ProductFormStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object product = freezed,
+    Object image = freezed,
     Object showErrorMessages = freezed,
     Object isSaving = freezed,
     Object isEditing = freezed,
@@ -1242,6 +1249,7 @@ class _$ProductFormStateCopyWithImpl<$Res>
   }) {
     return _then(_value.copyWith(
       product: product == freezed ? _value.product : product as FSProduct,
+      image: image == freezed ? _value.image : image as Uint8List,
       showErrorMessages: showErrorMessages == freezed
           ? _value.showErrorMessages
           : showErrorMessages as bool,
@@ -1274,6 +1282,7 @@ abstract class _$ProductFormStateCopyWith<$Res>
   @override
   $Res call(
       {FSProduct product,
+      Uint8List image,
       bool showErrorMessages,
       bool isSaving,
       bool isEditing,
@@ -1298,6 +1307,7 @@ class __$ProductFormStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object product = freezed,
+    Object image = freezed,
     Object showErrorMessages = freezed,
     Object isSaving = freezed,
     Object isEditing = freezed,
@@ -1306,6 +1316,7 @@ class __$ProductFormStateCopyWithImpl<$Res>
   }) {
     return _then(_ProductFormState(
       product: product == freezed ? _value.product : product as FSProduct,
+      image: image == freezed ? _value.image : image as Uint8List,
       showErrorMessages: showErrorMessages == freezed
           ? _value.showErrorMessages
           : showErrorMessages as bool,
@@ -1323,12 +1334,14 @@ class __$ProductFormStateCopyWithImpl<$Res>
 class _$_ProductFormState implements _ProductFormState {
   const _$_ProductFormState(
       {@required this.product,
+      @required this.image,
       @required this.showErrorMessages,
       @required this.isSaving,
       @required this.isEditing,
       @required this.saved,
       @required this.productStateOption})
       : assert(product != null),
+        assert(image != null),
         assert(showErrorMessages != null),
         assert(isSaving != null),
         assert(isEditing != null),
@@ -1337,6 +1350,8 @@ class _$_ProductFormState implements _ProductFormState {
 
   @override
   final FSProduct product;
+  @override
+  final Uint8List image;
   @override
   final bool showErrorMessages;
   @override
@@ -1350,7 +1365,7 @@ class _$_ProductFormState implements _ProductFormState {
 
   @override
   String toString() {
-    return 'ProductFormState(product: $product, showErrorMessages: $showErrorMessages, isSaving: $isSaving, isEditing: $isEditing, saved: $saved, productStateOption: $productStateOption)';
+    return 'ProductFormState(product: $product, image: $image, showErrorMessages: $showErrorMessages, isSaving: $isSaving, isEditing: $isEditing, saved: $saved, productStateOption: $productStateOption)';
   }
 
   @override
@@ -1360,6 +1375,8 @@ class _$_ProductFormState implements _ProductFormState {
             (identical(other.product, product) ||
                 const DeepCollectionEquality()
                     .equals(other.product, product)) &&
+            (identical(other.image, image) ||
+                const DeepCollectionEquality().equals(other.image, image)) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
                 const DeepCollectionEquality()
                     .equals(other.showErrorMessages, showErrorMessages)) &&
@@ -1380,6 +1397,7 @@ class _$_ProductFormState implements _ProductFormState {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(product) ^
+      const DeepCollectionEquality().hash(image) ^
       const DeepCollectionEquality().hash(showErrorMessages) ^
       const DeepCollectionEquality().hash(isSaving) ^
       const DeepCollectionEquality().hash(isEditing) ^
@@ -1395,6 +1413,7 @@ class _$_ProductFormState implements _ProductFormState {
 abstract class _ProductFormState implements ProductFormState {
   const factory _ProductFormState(
           {@required FSProduct product,
+          @required Uint8List image,
           @required bool showErrorMessages,
           @required bool isSaving,
           @required bool isEditing,
@@ -1404,6 +1423,8 @@ abstract class _ProductFormState implements ProductFormState {
 
   @override
   FSProduct get product;
+  @override
+  Uint8List get image;
   @override
   bool get showErrorMessages;
   @override

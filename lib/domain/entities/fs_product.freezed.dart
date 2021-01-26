@@ -19,14 +19,14 @@ class _$FSProductTearOff {
       @required ProductName productName,
       @required ProductDescription productDescription,
       @required ProductPrice productPrice,
-      @required Uint8List productImage,
+      @required String productImageURL,
       @required String category}) {
     return _FSProduct(
       uID: uID,
       productName: productName,
       productDescription: productDescription,
       productPrice: productPrice,
-      productImage: productImage,
+      productImageURL: productImageURL,
       category: category,
     );
   }
@@ -42,7 +42,7 @@ mixin _$FSProduct {
   ProductName get productName;
   ProductDescription get productDescription;
   ProductPrice get productPrice;
-  Uint8List get productImage;
+  String get productImageURL;
   String get category;
 
   @JsonKey(ignore: true)
@@ -58,7 +58,7 @@ abstract class $FSProductCopyWith<$Res> {
       ProductName productName,
       ProductDescription productDescription,
       ProductPrice productPrice,
-      Uint8List productImage,
+      String productImageURL,
       String category});
 }
 
@@ -76,7 +76,7 @@ class _$FSProductCopyWithImpl<$Res> implements $FSProductCopyWith<$Res> {
     Object productName = freezed,
     Object productDescription = freezed,
     Object productPrice = freezed,
-    Object productImage = freezed,
+    Object productImageURL = freezed,
     Object category = freezed,
   }) {
     return _then(_value.copyWith(
@@ -90,9 +90,9 @@ class _$FSProductCopyWithImpl<$Res> implements $FSProductCopyWith<$Res> {
       productPrice: productPrice == freezed
           ? _value.productPrice
           : productPrice as ProductPrice,
-      productImage: productImage == freezed
-          ? _value.productImage
-          : productImage as Uint8List,
+      productImageURL: productImageURL == freezed
+          ? _value.productImageURL
+          : productImageURL as String,
       category: category == freezed ? _value.category : category as String,
     ));
   }
@@ -109,7 +109,7 @@ abstract class _$FSProductCopyWith<$Res> implements $FSProductCopyWith<$Res> {
       ProductName productName,
       ProductDescription productDescription,
       ProductPrice productPrice,
-      Uint8List productImage,
+      String productImageURL,
       String category});
 }
 
@@ -128,7 +128,7 @@ class __$FSProductCopyWithImpl<$Res> extends _$FSProductCopyWithImpl<$Res>
     Object productName = freezed,
     Object productDescription = freezed,
     Object productPrice = freezed,
-    Object productImage = freezed,
+    Object productImageURL = freezed,
     Object category = freezed,
   }) {
     return _then(_FSProduct(
@@ -142,9 +142,9 @@ class __$FSProductCopyWithImpl<$Res> extends _$FSProductCopyWithImpl<$Res>
       productPrice: productPrice == freezed
           ? _value.productPrice
           : productPrice as ProductPrice,
-      productImage: productImage == freezed
-          ? _value.productImage
-          : productImage as Uint8List,
+      productImageURL: productImageURL == freezed
+          ? _value.productImageURL
+          : productImageURL as String,
       category: category == freezed ? _value.category : category as String,
     ));
   }
@@ -157,13 +157,13 @@ class _$_FSProduct extends _FSProduct {
       @required this.productName,
       @required this.productDescription,
       @required this.productPrice,
-      @required this.productImage,
+      @required this.productImageURL,
       @required this.category})
       : assert(uID != null),
         assert(productName != null),
         assert(productDescription != null),
         assert(productPrice != null),
-        assert(productImage != null),
+        assert(productImageURL != null),
         assert(category != null),
         super._();
 
@@ -176,13 +176,13 @@ class _$_FSProduct extends _FSProduct {
   @override
   final ProductPrice productPrice;
   @override
-  final Uint8List productImage;
+  final String productImageURL;
   @override
   final String category;
 
   @override
   String toString() {
-    return 'FSProduct(uID: $uID, productName: $productName, productDescription: $productDescription, productPrice: $productPrice, productImage: $productImage, category: $category)';
+    return 'FSProduct(uID: $uID, productName: $productName, productDescription: $productDescription, productPrice: $productPrice, productImageURL: $productImageURL, category: $category)';
   }
 
   @override
@@ -200,9 +200,9 @@ class _$_FSProduct extends _FSProduct {
             (identical(other.productPrice, productPrice) ||
                 const DeepCollectionEquality()
                     .equals(other.productPrice, productPrice)) &&
-            (identical(other.productImage, productImage) ||
+            (identical(other.productImageURL, productImageURL) ||
                 const DeepCollectionEquality()
-                    .equals(other.productImage, productImage)) &&
+                    .equals(other.productImageURL, productImageURL)) &&
             (identical(other.category, category) ||
                 const DeepCollectionEquality()
                     .equals(other.category, category)));
@@ -215,7 +215,7 @@ class _$_FSProduct extends _FSProduct {
       const DeepCollectionEquality().hash(productName) ^
       const DeepCollectionEquality().hash(productDescription) ^
       const DeepCollectionEquality().hash(productPrice) ^
-      const DeepCollectionEquality().hash(productImage) ^
+      const DeepCollectionEquality().hash(productImageURL) ^
       const DeepCollectionEquality().hash(category);
 
   @JsonKey(ignore: true)
@@ -231,7 +231,7 @@ abstract class _FSProduct extends FSProduct {
       @required ProductName productName,
       @required ProductDescription productDescription,
       @required ProductPrice productPrice,
-      @required Uint8List productImage,
+      @required String productImageURL,
       @required String category}) = _$_FSProduct;
 
   @override
@@ -243,7 +243,7 @@ abstract class _FSProduct extends FSProduct {
   @override
   ProductPrice get productPrice;
   @override
-  Uint8List get productImage;
+  String get productImageURL;
   @override
   String get category;
   @override
